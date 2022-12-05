@@ -7,4 +7,6 @@ class ElaboradorApp(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(ElaboradorApp, self).get_context_data(**kwargs)
+        context['disciplinas'] = Disciplina.objects.all()
+        context['conteudos'] = Conteudo.objects.all()
         return context

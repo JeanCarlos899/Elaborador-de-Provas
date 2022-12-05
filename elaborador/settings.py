@@ -39,8 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # my apps
     'elaboradorapp',
-    # apps de terceiros
-    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
