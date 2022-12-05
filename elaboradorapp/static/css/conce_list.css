@@ -1,0 +1,41 @@
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.menu {
+    list-style: none;
+    border: 1px solid black;
+    float: left;
+
+}
+.menu li {
+    position: relative;
+    float: left;
+    border-right: 1px solid black;
+}
+.menu li a {
+    color: black; 
+    text-decoration: none; 
+    padding: 5px 10px; 
+    display: block;}
+
+.menu li a:hover{
+    background:#333; 
+    color:#fff; 
+    text-shadow:0px 0px 5px #fff; 
+}
+
+.menu li  ul{
+    position:absolute; 
+    top:25px; 
+    left:0;
+    background-color:rgb(255, 255, 255); 
+    display:none;
+}  
+
+.header {
+    margin: 10px;
+}
