@@ -50,8 +50,9 @@ class Question(models.Model): #personpython manage.py sqlflush
     alternativa_e = models.TextField('Alternativa_e', max_length=5000)
     gabarito = models.CharField('Gabarito', max_length=5000, choices = alternativas)
     
+    
     def __str__(self):
-        return self.disciplina + ' - ' + self.conteudo + ' - ' + self.enunciado[:50]
+        return str(self.disciplina) + ' - ' + str(self.conteudo) + ' - ' + str(self.enunciado[:50])
 
 
 

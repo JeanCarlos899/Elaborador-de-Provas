@@ -8,5 +8,5 @@ from . import views
 app_name = 'elaboradorapp'
 
 urlpatterns = [
-    path('', views.ElaboradorApp.as_view(), name='question_list'),
+    path('', views.ElaboradorApp.as_view(), name='index'),
 ]

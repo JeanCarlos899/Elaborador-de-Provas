@@ -23,6 +23,9 @@
                                   <div class="form-group">
                                     <label for="exampleFormControlSelect1">Disciplina</label>
                                     <select class="form-control" id="exampleFormControlSelect1">
+                                      {% for question in object_list %}
+                                        <option>{{ question.disciplina }}</option>
+                                      {% endfor %}
 
                                     </select>
                                     <label for="exampleFormControlSelect1">Série</label>
@@ -37,7 +40,9 @@
                                   <div class="form-group">
                                     <label for="exampleFormControlSelect1">Conteúdo</label>
                                     <select class="form-control" id="exampleFormControlSelect1">
-             
+                                    {% for question in object_list %}
+                                      <option>{{ question.conteudo }}</option>
+                                    {% endfor %}
                                     </select>
                                     <label for="exampleFormControlSelect1">Dificuldade</label>
                                     <select class="form-control" id="exampleFormControlSelect1">
