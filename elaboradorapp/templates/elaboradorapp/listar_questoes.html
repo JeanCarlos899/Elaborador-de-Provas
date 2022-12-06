@@ -1,0 +1,26 @@
+{% extends "elaboradorapp/base.html" %}
+
+{% block title %}Listagem dos filmes{% endblock %}
+
+{% block content %}
+    <br>
+    <br>
+    <br>
+    {% for questao in questoes %}
+        {{ questao.enunciado }} <br>
+        {{ questao.alternativa_a }} <br>
+        {{ questao.alternativa_b }} <br>
+        {{ questao.alternativa_c }} <br>
+        {{ questao.alternativa_d }} <br>
+        {{ questao.alternativa_e }} <br>
+        {{ questao.gabarito }}
+        <hr>
+    {% endfor %}
+{% endblock content %}
+
+
+
+
+
+
+

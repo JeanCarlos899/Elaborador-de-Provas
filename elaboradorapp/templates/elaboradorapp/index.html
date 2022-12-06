@@ -11,6 +11,7 @@
         <div class="col-mb-6">
             <div class="card">
                 <div class="card">
+                  <form class="form-group" action="." method="GET">
                     <div class="card-header">
                         <div class="row">
                             <div class="col m-auto">
@@ -20,59 +21,52 @@
                             <div class="col">
                               <div class="row">
                                 <div class="col">
-                                  <div class="form-group">
-                                    <label for="exampleFormControlSelect1">Disciplina</label>
-                                    <select class="form-control" id="exampleFormControlSelect1">
-                                      {% for disciplina in disciplinas %}
-                                        <option>{{ disciplina.name }}</option>
-                                      {% endfor %}
-                                    </select>
-                                  </div>
+                                  <label for="exampleFormControlSelect1">Disciplina</label>
+                                  <select class="form-control" id="exampleFormControlSelect1" name="disciplina_value">
+                                    {% for disciplina in disciplinas %}
+                                      <option>{{ disciplina.name }}</option>
+                                    {% endfor %}
+                                  </select>
                                 </div>
                               </div>
                               <div class="row">
                                 <div class="col">
-                                  <div class="form-group">
-                                    <label for="exampleFormControlSelect1">Série</label>
-                                    <select class="form-control" id="exampleFormControlSelect1">
-                                      <option>1</option>
-                                      <option>2</option>
-                                      <option>3</option>
-                                    </select>
-                                  </div>
+                                  <label for="exampleFormControlSelect1">Série</label>
+                                  <select class="form-control" id="exampleFormControlSelect1" name="serie_value">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                  </select>
                                 </div>
                                 <div class="col">
-                                  <div class="form-group">
-                                    <label for="exampleFormControlSelect1">Dificuldade</label>
-                                    <select class="form-control" id="exampleFormControlSelect1">
-                                      <option>1</option>
-                                      <option>2</option>
-                                      <option>3</option>
-                                      <option>4</option>
-                                      <option>5</option>
-                                    </select>
-                                  </div>
+                                  <label for="exampleFormControlSelect1">Dificuldade</label>
+                                  <select class="form-control" id="exampleFormControlSelect1" name="dificuldade_value">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                  </select>
                                 </div>
                               </div>
                               <div class="row">
                                 <div class="col">
-                                  <div class="form-group">
-                                    <label for="exampleFormControlSelect1">Conteúdo</label>
-                                    <input type="search" list="conteudos" class="form-control" id="exampleFormControlSelect1" placeholder="Pesquise aqui o conteúdo">
-                                    <datalist id="conteudos">
-                                      {% for conteudo in conteudos %}
-                                        <option>{{ conteudo.name }}</option>
-                                      {% endfor %}
-                                    </datalist>
-
-                                  </div>
+                                  <label for="exampleFormControlSelect1">Conteúdo</label>
+                                  <input type="search" list="conteudos" class="form-control" name="conteudo_value" id="exampleFormControlSelect1" placeholder="Pesquise aqui o conteúdo">
+                                  <datalist id="conteudos">
+                                    {% for conteudo in conteudos %}
+                                      <option>{{ conteudo.name }}</option>
+                                    {% endfor %}
+                                  </datalist>
                                 </div>
                               </div>
-                            </div>   
-                       </div>
-                    </div>
+                            </div>  
+                          </div>
+                        </div>
                     <div class="card-body">
-                      <a href="#" class="btn btn-primary">Gerar prova</a>
+                      <button type="submit" class="btn btn-success form-control mt-2" title="Clique para realizar a pesquisar">Confirmar</button>
+                      <a href="{% url 'elaboradorapp:listar_questoes' %}" class="btn btn-primary form-control mt-2">Gerar prova</a>
+
                     </div>
                   </div>
         </div>
