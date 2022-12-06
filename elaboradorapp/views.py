@@ -28,11 +28,9 @@ class ListarQuestoes(ListView):
 
         if disciplina:
             questoes = Question.objects.filter(Q(disciplina__icontains=disciplina) & Q(conteudo__icontains=conteudo) & Q(serie__icontains=serie) & Q(dificuldade__icontains=dificuldade))
-            print("tem disciplina")
         
         context.update({
             'questoes': questoes,
-        
         })
         return context
 

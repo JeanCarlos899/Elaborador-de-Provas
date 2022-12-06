@@ -11,7 +11,7 @@
         <div class="col-mb-6">
             <div class="card">
                 <div class="card">
-                  <form class="form-group" action="." method="GET">
+                  <form class="form-group" action="?" method="GET">
                     <div class="card-header">
                         <div class="row">
                             <div class="col m-auto">
@@ -22,7 +22,7 @@
                               <div class="row">
                                 <div class="col">
                                   <label for="exampleFormControlSelect1">Disciplina</label>
-                                  <select class="form-control" id="exampleFormControlSelect1" name="disciplina_value">
+                                  <select class="form-control" id="exampleFormControlSelect1" name="disciplina_value" value="{{ request.get.disciplina_value }}">
                                     {% for disciplina in disciplinas %}
                                       <option>{{ disciplina.name }}</option>
                                     {% endfor %}
@@ -32,7 +32,7 @@
                               <div class="row">
                                 <div class="col">
                                   <label for="exampleFormControlSelect1">Série</label>
-                                  <select class="form-control" id="exampleFormControlSelect1" name="serie_value">
+                                  <select class="form-control" id="exampleFormControlSelect1" name="serie_value" value="{{ request.get.serie_value }}">
                                     <option>1</option>
                                     <option>2</option>
                                     <option>3</option>
@@ -40,7 +40,7 @@
                                 </div>
                                 <div class="col">
                                   <label for="exampleFormControlSelect1">Dificuldade</label>
-                                  <select class="form-control" id="exampleFormControlSelect1" name="dificuldade_value">
+                                  <select class="form-control" id="exampleFormControlSelect1" name="dificuldade_value" value="{{ request.get.dificuldade_value }}">
                                     <option>1</option>
                                     <option>2</option>
                                     <option>3</option>
@@ -52,7 +52,7 @@
                               <div class="row">
                                 <div class="col">
                                   <label for="exampleFormControlSelect1">Conteúdo</label>
-                                  <input type="search" list="conteudos" class="form-control" name="conteudo_value" id="exampleFormControlSelect1" placeholder="Pesquise aqui o conteúdo">
+                                  <input type="search" list="conteudos" class="form-control" name="conteudo_value" value="{{ request.get.conteudo_value }}" id="exampleFormControlSelect1" placeholder="Pesquise aqui o conteúdo">
                                   <datalist id="conteudos">
                                     {% for conteudo in conteudos %}
                                       <option>{{ conteudo.name }}</option>
