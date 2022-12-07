@@ -4,14 +4,13 @@
 
 
 
-
 {% block content %}
 <div class="container">
     <div class="row justify-content-center align-items-center vh-100">
         <div class="col-mb-6">
             <div class="card">
                 <div class="card">
-                  <form class="form-group" action="?" method="GET">
+                  <form class="form-group" action="{% url 'elaboradorapp:listar_questoes' %}" method="GET">
                     <div class="card-header">
                         <div class="row">
                             <div class="col m-auto">
@@ -64,9 +63,7 @@
                           </div>
                         </div>
                     <div class="card-body">
-                      <button type="submit" class="btn btn-success form-control mt-2" title="Clique para realizar a pesquisar">Confirmar</button>
-                      <a href="{% url 'elaboradorapp:listar_questoes' %}" class="btn btn-primary form-control mt-2">Gerar prova</a>
-
+                      <button type="submit" class="btn btn-primary form-control mt-2" title="Clique para realizar a pesquisar">Confirmar</button>
                     </div>
                   </div>
         </div>

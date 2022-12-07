@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-admin.site.site_header = 'Elaborador de Questões'
+admin.site.site_header = 'Elaborador de Provas'
 admin.site.site_title = "Elaborador App"
 
 urlpatterns = [
