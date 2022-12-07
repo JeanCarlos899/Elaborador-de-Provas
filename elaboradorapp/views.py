@@ -33,16 +33,21 @@ class ListarQuestoes(ListView):
         questoes = Question.objects.all()
         conteudo = Conteudo.objects.filter(name=conteudo_escolhido)
         disciplina = Disciplina.objects.filter(name=disciplina_escolhida)
-
-        conteudo = conteudo[0].pk
-        disciplina = disciplina[0].pk
+        try:
+            conteudo = conteudo[0].pk
+            disciplina = disciplina[0].pk
+        except:
+            conteudo = None
+            disciplina = None
 
         if disciplina:
             questoes = Question.objects.filter(disciplina=disciplina, conteudo=conteudo, serie=serie_escolhida, dificuldade=dificuldade_escolhida)
+            questoes = questoes.order_by('?')[:10]
 
         context.update({
             'questoes': questoes,
         })
+        
         return context
 
 

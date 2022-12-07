@@ -6,21 +6,27 @@
 <br>
 <br>
     <div class="container mt-5">
-    {% for questao in questoes %}
-        <h3 class="text-center">Avaliação de {{ questao.disciplina }}</h3>
-        <p><strong>{{ questao.enunciado }}</strong></p><br>
-        <p>a) {{ questao.alternativa_a }}</p>
-        <p>b) {{ questao.alternativa_b }}</p>
-        <p>c) {{ questao.alternativa_c }}</p>
-        <p>d) {{ questao.alternativa_d }}</p>
-        <p>e) {{ questao.alternativa_e }}</p><br>
-        <p><strong>Gabarito da questão:</strong></p>
-        <p><strong>Opção {{ questao.gabarito }}</strong></p>
-        <hr>
-        <br>
-        <br>
+        {% if questoes %}
+            <h3 class="text-center">Questões da Avaliação</h3>
+            <hr>
+            {% for questao in questoes %}
+                <p class="mb-4"><strong>{{ questao.enunciado }}</strong></p>
+                <p class="mb-0">a) {{ questao.alternativa_a }}</p>
+                <p class="mb-0">b) {{ questao.alternativa_b }}</p>
+                <p class="mb-0">c) {{ questao.alternativa_c }}</p>
+                <p class="mb-0">d) {{ questao.alternativa_d }}</p>
+                <p class="mb-3">e) {{ questao.alternativa_e }}</p>
+                <p class="mb-2"><strong>Gabarito da questão:</strong></p>
+                <p><strong>Opção {{ questao.gabarito }}</strong></p>
+                <hr>
+                
+            {% endfor %}
+            <br class="mb-5">
+        
+        {% else %}
+            <h3 class="text-center">Não há questões com esses filtros</h3>
+        {% endif %}
     </div>
-    {% endfor %}
 {% endblock content %}
 
 

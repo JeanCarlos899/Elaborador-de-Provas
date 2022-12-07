@@ -52,7 +52,7 @@ class Question(models.Model): #personpython manage.py sqlflush
     
     
     def __str__(self):
-        return str(self.disciplina) + ' - ' + str(self.conteudo) + ' - ' + str(self.enunciado[:50])
+        return str(self.disciplina) + ' - ' + str(self.conteudo) + ' - ' + str(self.enunciado[:100])
 
 
 
