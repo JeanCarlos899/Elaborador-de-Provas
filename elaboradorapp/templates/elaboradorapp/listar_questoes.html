@@ -21,7 +21,13 @@
                 <hr>
                 
             {% endfor %}
-            <br class="mb-5">
+            <a href="{% url 'elaboradorapp:listar_questoes_pdf' %}" class="btn btn-primary">Gerar PDF</a>
+            <br>
+            <br>
+            <br>
+            <br>
+
+
         
         {% else %}
             <h3 class="text-center">Não há questões com esses filtros</h3>

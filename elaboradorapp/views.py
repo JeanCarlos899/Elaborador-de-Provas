@@ -1,5 +1,5 @@
 from django.views.generic import ListView, View
-# from elaboradorapp.utils import GeraPDFMixin
+from elaboradorapp.utils import GeraPDFMixin
 from .models import Question, Disciplina, Conteudo
 
 
@@ -18,6 +18,8 @@ class ListarQuestoes(ListView):
     template_name = 'elaboradorapp/listar_questoes.html'
     
     def get_context_data(self, **kwargs):
+        global questoes 
+
         disciplina_escolhida = self.request.GET.get('disciplina_value')
         conteudo_escolhido = self.request.GET.get('conteudo_value')
         serie_escolhida = self.request.GET.get('serie_value')
@@ -41,11 +43,13 @@ class ListarQuestoes(ListView):
         context.update({
             'questoes': questoes,
         })
+
+        questoes = context
         
         return context
 
 
-# class ListarQuestoesPDF(View, GeraPDFMixin):
-#     def get(self, request, *args, **kwargs):
-#         questoes = Question.objects.all()
+class ListarQuestoesPDF(View, GeraPDFMixin):
+    def get(self, request, *args, **kwargs):
+        return self.render_to_pdf('elaboradorapp/listar_questoes.html', questoes)
         
