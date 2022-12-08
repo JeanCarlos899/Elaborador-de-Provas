@@ -48,6 +48,9 @@ class ListarQuestoes(ListView):
         
         return context
 
+class Sobre(ListView):
+    model = Question
+    template_name = 'elaboradorapp/sobre.html'
 
 class ListarQuestoesPDF(View, GeraPDFMixin):
     def get(self, request, *args, **kwargs):

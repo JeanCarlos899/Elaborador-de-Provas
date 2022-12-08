@@ -3,8 +3,7 @@
 {% block title %}Avaliação{% endblock %}
 
 {% block content %}
-<br>
-<br>
+<br><br>
     <div class="container mt-5">
         {% if questoes %}
             <h3 class="text-center">Questões da Avaliação</h3>
@@ -22,13 +21,7 @@
                 
             {% endfor %}
             <a href="{% url 'elaboradorapp:listar_questoes_pdf' %}" class="btn btn-primary">Gerar PDF</a>
-            <br>
-            <br>
-            <br>
-            <br>
-
-
-        
+            <br><br><br><br>
         {% else %}
             <h3 class="text-center">Não há questões com esses filtros</h3>
         {% endif %}

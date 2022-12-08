@@ -1,79 +1,75 @@
 {% extends "elaboradorapp/base.html" %}
-
-{% block title %}Listagem dos filmes{% endblock %}
-
-
+{% block title %}Elaborador de Provas{% endblock %}
 
 {% block content %}
 <div class="container">
+  <form class="form-group" action="{% url 'elaboradorapp:listar_questoes' %}" method="GET">
     <div class="row justify-content-center align-items-center vh-100">
-        <div class="col-mb-6">
-            <div class="card">
-                <div class="card">
-                  <form class="form-group" action="{% url 'elaboradorapp:listar_questoes' %}" method="GET">
-                    <div class="card-header">
-                        <div class="row">
-                            <div class="col m-auto">
-                              <p class="mb-1" style="color: rgb(149, 13, 13); font-size: 20px; font-family: Arial, Helvetica, sans-serif;">Configurações da prova</p>
-                              <p class="mt-1"><strong>Configure como deseja que a prova seja gerada</strong></p>
-                            </div>
-                            <div class="col">
-                              <div class="row">
-                                <div class="col">
-                                  <label for="exampleFormControlSelect1">Disciplina</label>
-                                  <select class="form-control" id="exampleFormControlSelect1" name="disciplina_value" value="{{ request.get.disciplina_value }}">
-                                    {% for disciplina in disciplinas %}
-                                      <option>{{ disciplina.name }}</option>
-                                    {% endfor %}
-                                  </select>
-                                </div>
-                              </div>
-                              <div class="row">
-                                <div class="col">
-                                  <label for="exampleFormControlSelect1">Série</label>
-                                  <select class="form-control" id="exampleFormControlSelect1" name="serie_value" value="{{ request.get.serie_value }}">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                  </select>
-                                </div>
-                                <div class="col">
-                                  <label for="exampleFormControlSelect1">Dificuldade</label>
-                                  <select class="form-control" id="exampleFormControlSelect1" name="dificuldade_value" value="{{ request.get.dificuldade_value }}">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                  </select>
-                                </div>
-                              </div>
-                              <div class="row">
-                                <div class="col">
-                                  <label for="exampleFormControlSelect1">Conteúdo</label>
-                                  <input type="search" list="conteudos" class="form-control" name="conteudo_value" value="{{ request.get.conteudo_value }}" id="exampleFormControlSelect1" placeholder="Pesquise aqui o conteúdo">
-                                  <datalist id="conteudos">
-                                    {% for conteudo in conteudos %}
-                                      <option>{{ conteudo.name }}</option>
-                                    {% endfor %}
-                                  </datalist>
-                                </div>
-                              </div>
-                            </div>  
-                          </div>
-                        </div>
-                    <div class="card-body">
-                      <button type="submit" class="btn btn-primary form-control mt-2" title="Clique para realizar a pesquisar">Confirmar</button>
+      <div class="col-mb-6">
+        <div class="card">
+          <div class="card">
+            <div class="card-header">
+              <div class="row">
+                <div class="col m-auto">
+                  <p class="mb-1" style="color: rgb(149, 13, 13); font-size: 20px; font-family: Arial, Helvetica, sans-serif;">Configurações da prova</p>
+                  <p class="mt-1"><strong>Configure como deseja que a prova seja gerada</strong></p>
+                </div>
+                <div class="col">
+                  <div class="row">
+                    <div class="col">
+                      <label for="exampleFormControlSelect1">Disciplina</label>
+                      <select class="form-control" id="exampleFormControlSelect1" name="disciplina_value" value="{{ request.get.disciplina_value }}">
+                        {% for disciplina in disciplinas %}
+                          <option>{{ disciplina.name }}</option>
+                        {% endfor %}
+                      </select>
                     </div>
                   </div>
-        </div>
+                  <div class="row">
+                    <div class="col">
+                      <div class="row">
+                        <div class="col">
+                          <label for="exampleFormControlSelect1">Série</label>
+                          <select class="form-control" id="exampleFormControlSelect1" name="serie_value" value="{{ request.get.serie_value }}">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                          </select>
+                        </div>
+                        <div class="col">
+                          <label for="exampleFormControlSelect1">Dificuldade</label>
+                          <select class="form-control" id="exampleFormControlSelect1" name="dificuldade_value" value="{{ request.get.dificuldade_value }}">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <label for="exampleFormControlSelect1">Conteúdo</label>
+                      <input type="search" list="conteudos" class="form-control" name="conteudo_value" value="{{ request.get.conteudo_value }}" id="exampleFormControlSelect1" placeholder="Pesquise aqui o conteúdo">
+                      <datalist id="conteudos">
+                      {% for conteudo in conteudos %}
+                        <option>{{ conteudo.name }}</option>
+                      {% endfor %}
+                      </datalist>
+                    </div>
+                  </div>
+                </div>  
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <button type="submit" class="btn btn-primary form-control mt-2" title="Clique para realizar a pesquisar">Confirmar</button>
+          </div>
+        </div> 
+      </div>
     </div>
+  </form>
 </div>
 {% endblock content %}
-
-
-
-
-
-
-
