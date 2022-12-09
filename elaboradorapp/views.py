@@ -25,6 +25,9 @@ class ListarQuestoes(ListView):
         serie_escolhida = self.request.GET.get('serie_value')
         dificuldade_escolhida = self.request.GET.get('dificuldade_value')
 
+        print(serie_escolhida)
+        print(dificuldade_escolhida)
+
         context = super().get_context_data(**kwargs)
         questoes = Question.objects.all()
         conteudo = Conteudo.objects.filter(name=conteudo_escolhido)
@@ -35,11 +38,19 @@ class ListarQuestoes(ListView):
         except:
             conteudo = None
             disciplina = None
-
-        if disciplina:
+            
+        if serie_escolhida == 'Indefinido':
+            questoes = Question.objects.filter(disciplina=disciplina, conteudo=conteudo, dificuldade=dificuldade_escolhida)
+        if dificuldade_escolhida == 'Indefinido':
+            questoes = Question.objects.filter(disciplina=disciplina, conteudo=conteudo, serie=serie_escolhida)
+        if dificuldade_escolhida and serie_escolhida == 'Indefinido':
+            questoes = Question.objects.filter(disciplina=disciplina, conteudo=conteudo)
+        if serie_escolhida == 'Indefinido' and dificuldade_escolhida == 'Indefinido':
+            questoes = Question.objects.filter(disciplina=disciplina, conteudo=conteudo)
+        if dificuldade_escolhida != 'Indefinido' and serie_escolhida != 'Indefinido':
             questoes = Question.objects.filter(disciplina=disciplina, conteudo=conteudo, serie=serie_escolhida, dificuldade=dificuldade_escolhida)
-            questoes = questoes.order_by('?')[:10]
 
+        questoes = questoes.order_by('?')[:10]
         context.update({
             'questoes': questoes,
         })
@@ -53,6 +64,6 @@ class Sobre(ListView):
     template_name = 'elaboradorapp/sobre.html'
 
 class ListarQuestoesPDF(View, GeraPDFMixin):
-    def get(self, request, *args, **kwargs):
+    def get(self):
         return self.render_to_pdf('elaboradorapp/listar_questoes.html', questoes)
         
