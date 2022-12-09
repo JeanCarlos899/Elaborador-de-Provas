@@ -52,7 +52,7 @@
                   <div class="row">
                     <div class="col">
                       <label for="exampleFormControlSelect1">Conteúdo</label>
-                      <input type="search" list="conteudos" class="form-control" name="conteudo_value" value="{{ request.get.conteudo_value }}" id="exampleFormControlSelect1" placeholder="Pesquise aqui o conteúdo">
+                      <input type="search" list="conteudos" class="form-control" name="conteudo_value" value="{{ request.get.conteudo_value }}" id="exampleFormControlSelect1" placeholder="Pesquise aqui o conteúdo" required>
                       <datalist id="conteudos">
                       {% for conteudo in conteudos %}
                         <option>{{ conteudo.name }}</option>
