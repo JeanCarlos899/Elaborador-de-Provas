@@ -1,5 +1,4 @@
 from django.views.generic import ListView, View
-from elaboradorapp.utils import GeraPDFMixin
 from .models import Question, Disciplina, Conteudo
 
 
@@ -59,11 +58,6 @@ class ListarQuestoes(ListView):
         
         return context
 
-class Sobre(ListView):
+class Sobre(View):
     model = Question
     template_name = 'elaboradorapp/sobre.html'
-
-class ListarQuestoesPDF(View, GeraPDFMixin):
-    def get(self):
-        return self.render_to_pdf('elaboradorapp/listar_questoes.html', questoes)
-        

@@ -43,6 +43,7 @@ class Question(models.Model): #personpython manage.py sqlflush
     conteudo = models.ForeignKey(Conteudo, on_delete=models.SET_NULL, null=True)
     dificuldade = models.CharField('Dificuldade', max_length = 5, choices = difficulty_question, default = '1')
     enunciado = models.TextField('Enunciado', max_length=5000)
+    imagem = models.ImageField('imagem', upload_to='images/', null=True, blank=True)
     alternativa_a = models.TextField('Alternativa_a', max_length=5000)
     alternativa_b = models.TextField('Alternativa_b', max_length=5000)
     alternativa_c = models.TextField('Alternativa_c', max_length=5000)
