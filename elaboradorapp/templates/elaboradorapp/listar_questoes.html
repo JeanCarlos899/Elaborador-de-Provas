@@ -10,7 +10,10 @@
             <hr>
             {% for questao in questoes %}
                 <p class="mb-3"><strong>{{ questao.enunciado }}</strong></p>
-                <img src="{{ questao.imagem.url }}" class="img-fluid" alt="Imagem responsiva">
+                <!-- verificar se há imagem -->
+                {% if questao.imagem %}
+                    <img src="{{ questao.imagem.url }}" class="img-fluid" alt="Imagem responsiva">
+                {% endif %}
                 <p class="mb-0">a) {{ questao.alternativa_a }}</p>
                 <p class="mb-0">b) {{ questao.alternativa_b }}</p>
                 <p class="mb-0">c) {{ questao.alternativa_c }}</p>
