@@ -37,11 +37,11 @@ class Conteudo(models.Model): #city
         return self.name
 
 
-class Question(models.Model): #personpython manage.py sqlflush
-    serie = models.CharField('Serie', max_length=100, choices = series)
+class Question(models.Model): 
+    serie = models.CharField('Serie', max_length=100, choices = series, blank=True)
     disciplina = models.ForeignKey(Disciplina, on_delete=models.SET_NULL, null=True)
     conteudo = models.ForeignKey(Conteudo, on_delete=models.SET_NULL, null=True)
-    dificuldade = models.CharField('Dificuldade', max_length = 5, choices = difficulty_question, default = '1')
+    dificuldade = models.CharField('Dificuldade', max_length = 5, choices = difficulty_question, blank=True)
     enunciado = models.TextField('Enunciado', max_length=5000)
     imagem = models.ImageField('imagem', upload_to='images/', null=True, blank=True)
     alternativa_a = models.TextField('Alternativa_a', max_length=5000)

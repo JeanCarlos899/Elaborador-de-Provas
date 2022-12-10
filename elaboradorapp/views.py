@@ -1,4 +1,4 @@
-from django.views.generic import ListView, View
+from django.views.generic import ListView
 from .models import Question, Disciplina, Conteudo
 
 
@@ -58,6 +58,6 @@ class ListarQuestoes(ListView):
         
         return context
 
-class Sobre(View):
+class Sobre(ListView):
     model = Question
     template_name = 'elaboradorapp/sobre.html'
