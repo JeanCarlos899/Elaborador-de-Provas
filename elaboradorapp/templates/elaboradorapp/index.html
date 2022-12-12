@@ -60,6 +60,9 @@
                         <option>{{ conteudo.name }}</option>
                       {% endfor %}
                       </datalist>
+
+                      <label for="exampleFormControlSelect1">Nome do professor</label>
+                      <input type="text" class="form-control" name="nome_professor" value="{{ request.get.nome_professor }}" id="exampleFormControlSelect1" placeholder="Informe o nome do professor para o cabeçalho" required>
                     </div>
                   </div>
                 </div>  

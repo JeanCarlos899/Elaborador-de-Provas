@@ -23,9 +23,7 @@ class ListarQuestoes(ListView):
         conteudo_escolhido = self.request.GET.get('conteudo_value')
         serie_escolhida = self.request.GET.get('serie_value')
         dificuldade_escolhida = self.request.GET.get('dificuldade_value')
-
-        print(serie_escolhida)
-        print(dificuldade_escolhida)
+        nome_professor = self.request.GET.get('nome_professor')
 
         context = super().get_context_data(**kwargs)
         questoes = Question.objects.all()
@@ -50,8 +48,12 @@ class ListarQuestoes(ListView):
             questoes = Question.objects.filter(disciplina=disciplina, conteudo=conteudo, serie=serie_escolhida, dificuldade=dificuldade_escolhida)
 
         questoes = questoes.order_by('?')[:10]
+
         context.update({
             'questoes': questoes,
+            'nome_disciplina': disciplina_escolhida,
+            'nome_conteudo': conteudo_escolhido,
+            'nome_professor': nome_professor,
         })
 
         questoes = context

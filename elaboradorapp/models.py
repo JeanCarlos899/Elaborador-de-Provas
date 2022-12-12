@@ -14,6 +14,7 @@ series = (
     ('3', '3'),
 )
 
+
 alternativas = (
     ('A', 'A'),
     ('B', 'B'),
@@ -44,11 +45,17 @@ class Question(models.Model):
     dificuldade = models.CharField('Dificuldade', max_length = 5, choices = difficulty_question, blank=True)
     enunciado = models.TextField('Enunciado', max_length=5000)
     imagem = models.ImageField('imagem', upload_to='images/', null=True, blank=True)
-    alternativa_a = models.TextField('Alternativa_a', max_length=5000)
-    alternativa_b = models.TextField('Alternativa_b', max_length=5000)
-    alternativa_c = models.TextField('Alternativa_c', max_length=5000)
-    alternativa_d = models.TextField('Alternativa_d', max_length=5000)
-    alternativa_e = models.TextField('Alternativa_e', max_length=5000)
+    comando = models.TextField('Comando', max_length=5000, null=True, blank=True)
+    alternativa_a = models.TextField('Alternativa_a', max_length=5000, null=True, blank=True)
+    imagem_a = models.ImageField('Imagem_a', upload_to='images/', null=True, blank=True)
+    alternativa_b = models.TextField('Alternativa_b', max_length=5000, null=True, blank=True)
+    imagem_b = models.ImageField('Imagem_b', upload_to='images/', null=True, blank=True)
+    alternativa_c = models.TextField('Alternativa_c', max_length=5000, null=True, blank=True)
+    imagem_c = models.ImageField('Imagem_c', upload_to='images/', null=True, blank=True)
+    alternativa_d = models.TextField('Alternativa_d', max_length=5000, null=True, blank=True)
+    imagem_d = models.ImageField('Imagem_d', upload_to='images/', null=True, blank=True)
+    alternativa_e = models.TextField('Alternativa_e', max_length=5000, null=True, blank=True)
+    imagem_e = models.ImageField('Imagem_e', upload_to='images/', null=True, blank=True)
     gabarito = models.CharField('Gabarito', max_length=5000, choices = alternativas)
     
     
