@@ -24,6 +24,8 @@ class ListarQuestoes(ListView):
         serie_escolhida = self.request.GET.get('serie_value')
         dificuldade_escolhida = self.request.GET.get('dificuldade_value')
         nome_professor = self.request.GET.get('nome_professor')
+        curso = self.request.GET.get('curso_value')
+        turma = self.request.GET.get('turma_value')
 
         context = super().get_context_data(**kwargs)
         questoes = Question.objects.all()
@@ -54,6 +56,8 @@ class ListarQuestoes(ListView):
             'nome_disciplina': disciplina_escolhida,
             'nome_conteudo': conteudo_escolhido,
             'nome_professor': nome_professor,
+            'curso': curso,
+            'turma': turma,
         })
 
         questoes = context
