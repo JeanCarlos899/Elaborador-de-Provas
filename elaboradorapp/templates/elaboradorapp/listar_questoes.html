@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'fontawesome-free-6.1.1-web/css/all.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Artifika&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="central">
@@ -19,17 +20,21 @@
                     <table class="tg mt-0">
                         <thead>
                             <tr>
-                                <td class="tg-0lax" rowspan="4"><img src="data:image/jpeg;base64,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" alt="" width="60px"></td>
+                                <td class="tg-0lax" rowspan="4" style="width: 80px;"><img src="{{ logo_url }}" alt="" width="80px"></td>
                                 <td class="tg-baqh" colspan="3">Avaliação de {{ nome_disciplina }} - {{ nome_conteudo }} </td>
                             </tr>
                             <tr>
-                                <td class="tg-0lax" style="width: 340px;">Curso: {{ curso }}</td>
-                                <td class="tg-0lax" style="width: 180px;">Turma: {{ turma }}</td>
-                                <td class="tg-0lax" rowspan="3" style="width: 70px;"></td>
+                                <td class="tg-0lax" style="width: 330px;">Curso: {{ curso }}</td>
+                                <td class="tg-0lax" style="width: 150px;">Turma: {{ turma }}</td>
+                                <td class="tg-0lax" rowspan="3" style="width: 80px; text-align: start !important;">
+                                <p id="nota">
+                                    NOTA
+                                </p>
+                                </td>
                             </tr>
                             <tr>
                                 <td class="tg-0lax">Professor: {{ nome_professor }}</td>
-                                <td class="tg-0lax">Data:</td>
+                                <td class="tg-0lax">Data: {{ data }}</td>
                             </tr>
                             <tr>
                                 <td class="tg-0lax">Nome:</td>
@@ -37,15 +42,33 @@
                             </tr>
                         </thead>
                     </table>
-                    <hr>
+                    <!-- lista ul exem -->
+                    
+                    {% if observacao1 %}
+                        <p class="mt-1 mb-0" style="font-size: 11px; text-align: justify;">Observações:</p>
+                        <p class="mb-0 text-justify" style="font-size: 11px; text-align: justify; margin-left: 20px;">
+                            <i class="fa-solid fa-angles-right" style="margin-right: 5px;"></i><i>{{ observacao1 }}</i>
+                        </p>
+                        
+                        {% if observacao2 %}
+                            <p class="mb-0 text-justify" style="font-size: 11px; text-align: justify; margin-left: 20px;">
+                                <i class="fa-solid fa-angles-right" style="margin-right: 5px;"></i><i>{{ observacao2 }}</i>
+                            </p>
+                            {% if observacao3 %}
+                                <p class="mb-0 text-justify" style="font-size: 11px; text-align: justify; margin-left: 20px;">
+                                    <i class="fa-solid fa-angles-right" style="margin-right: 5px;"></i><i>{{ observacao3 }}</i>
+                                </p>
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                    <hr class="mt-1 mb-1">
                     {% for questao in questoes %}
-                        <p class="mb-0" style="font-size: 12px;"><strong>Questão {{ forloop.counter }}:</strong></p>
-                        <p class="mb-2 text-justify" style="font-size: 12px; text-align: justify;"><strong>{{ questao.enunciado }}</strong></p>
+                        <p class="mb-2 text-justify" style="font-size: 11px; text-align: justify;"><strong>{{ forloop.counter }}. </strong>{{ questao.enunciado }}</p>
                         {% if questao.imagem %}
-                            <img src="{{ questao.imagem.url }}" class="img-fluid mb-2" style="font-size: 12px; text-align: justify; max-height: 250px; max-width: 350px;" alt="Imagem responsiva">
+                            <img src="{{ questao.imagem.url }}" class="img-fluid mb-2" style="font-size: 11px; text-align: justify; max-height: 250px; max-width: 350px;" alt="Imagem responsiva">
                         {% endif %}
                         {% if questao.comando %}
-                            <p class="mb-2 text-justify" style="font-size: 12px; text-align: justify;"><strong>{{ questao.comando }}</strong></p>
+                            <p class="mb-2 text-justify" style="font-size: 11px; text-align: justify;">{{ questao.comando }}</p>
                         {% endif %}
                         <div class="alternativas">
                             <div class="row">
@@ -70,20 +93,21 @@
                                         </p>
                                     </div>
                                 {% else %}
-                                    <p class="mb-0 text-justify" style="font-size: 12px; text-align: justify;">a) {{ questao.alternativa_a }}</p>
-                                    <p class="mb-0 text-justify" style="font-size: 12px; text-align: justify;">b) {{ questao.alternativa_b }}</p>
-                                    <p class="mb-0 text-justify" style="font-size: 12px; text-align: justify;">c) {{ questao.alternativa_c }}</p>
-                                    <p class="mb-0 text-justify" style="font-size: 12px; text-align: justify;">d) {{ questao.alternativa_d }}</p>
-                                    <p class="mb-2 text-justify" style="font-size: 12px; text-align: justify;">e) {{ questao.alternativa_e }}</p>
+                                    <p class="mb-0 text-justify" style="font-size: 11px; text-align: justify;">a) {{ questao.alternativa_a }}</p>
+                                    <p class="mb-0 text-justify" style="font-size: 11px; text-align: justify;">b) {{ questao.alternativa_b }}</p>
+                                    <p class="mb-0 text-justify" style="font-size: 11px; text-align: justify;">c) {{ questao.alternativa_c }}</p>
+                                    <p class="mb-0 text-justify" style="font-size: 11px; text-align: justify;">d) {{ questao.alternativa_d }}</p>
+                                    <p class="mb-2 text-justify" style="font-size: 11px; text-align: justify;">e) {{ questao.alternativa_e }}</p>
                                 {% endif %}
                             </div>
                         </div>
                     {% endfor %}
+                    <p style="text-align: right;" class="mt-5"><strong>Boa Avaliação!</strong></p>
                     <div class="break mb-3">
                         <hr>
-                        <p class="mb-2" style="font-size: 12px;"><strong>Gabarito</strong></p>
+                        <p class="mb-2" style="font-size: 11px;"><strong>Gabarito</strong></p>
                         {% for questao in questoes %}
-                            <p class="mb-0" style="font-size: 12px;"><strong>Questão {{ forloop.counter }} - {{ questao.gabarito }}</strong></p>
+                            <p class="mb-0" style="font-size: 11px;"><strong>Questão {{ forloop.counter }} - {{ questao.gabarito }}  |  {{questao.conteudo }}</strong></p>
                         {% endfor %}
                     </div>
                 {% else %}
@@ -96,6 +120,7 @@
           </div>
     </div>
     <style type="text/css">
+        @import url('https://fonts.googleapis.com/css2?family= Artifika & display = swap');
         .tg  {
             border-collapse:separate;
             border-spacing:1;
@@ -149,6 +174,19 @@
         }
         .col-10 {
             width: 96%;
+        }
+        p {
+            font-family: 'Artifika', serif !important;
+            font-size: 12px !important;
+        }
+        td {
+            font-family: 'Artifika', serif !important;
+            font-weight: bold;
+            font-size: 11px !important;
+        }
+        #nota {
+            text-align: center;
+            margin-top: -40px;
         }
     </style>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
