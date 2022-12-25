@@ -20,6 +20,7 @@ from django.conf.urls.static import static
 
 admin.site.site_header = 'Elaborador de Provas'
 admin.site.site_title = "Elaborador App"
+admin.site.index_title = "Bem-vindo ao painel de administração"
 
 urlpatterns = [
     path('', include('elaboradorapp.urls', namespace='elaboradorapp')),

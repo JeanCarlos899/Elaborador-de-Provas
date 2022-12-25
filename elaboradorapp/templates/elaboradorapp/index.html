@@ -24,7 +24,7 @@
                     <label for="exampleFormControlSelect1">Disciplina</label>
                     <select class="form-control" id="exampleFormControlSelect1" name="disciplina" value="{{ request.get.disciplina }}">
                       {% for disciplina in disciplinas %}
-                        <option>{{ disciplina.name }}</option>
+                        <option>{{ disciplina.nome }}</option>
                       {% endfor %}
                     </select>
                   </div>
@@ -51,7 +51,7 @@
                     <input type="search" list="conteudos" class="form-control" name="conteudo" value="{{ request.get.conteudo }}" id="exampleFormControlSelect1" placeholder="Pesquise aqui o conteúdo" required>
                     <datalist id="conteudos">
                     {% for conteudo in conteudos %}
-                      <option>{{ conteudo.name }}</option>
+                      <option>{{ conteudo.nome }}</option>
                     {% endfor %}
                     </datalist>
                   </div>
@@ -81,7 +81,7 @@
                       <input type="search" list="conteudos" class="form-control mt-3" name="segundo_conteudo" value="{{ request.get.segundo_conteudo }}" id="exampleFormControlSelect1" placeholder="Pesquise o segundo conteúdo">
                       <datalist id="conteudos">
                       {% for conteudo in conteudos %}
-                        <option>{{ conteudo.name }}</option>
+                        <option>{{ conteudo.nome }}</option>
                       {% endfor %}
                       </datalist>
                     </div>
@@ -93,7 +93,7 @@
                       <input type="search" list="conteudos" class="form-control mt-3" name="terceiro_conteudo" value="{{ request.get.terceiro_conteudo }}" id="exampleFormControlSelect1" placeholder="Pesquise o terceiro conteúdo">
                       <datalist id="conteudos">
                       {% for conteudo in conteudos %}
-                        <option>{{ conteudo.name }}</option>
+                        <option>{{ conteudo.nome }}</option>
                       {% endfor %}
                       </datalist>
                     </div>
@@ -114,12 +114,10 @@
                       <div class="col">
                         <label for="exampleFormControlSelect1">Dificuldade</label>
                         <select class="form-control" id="exampleFormControlSelect1" name="dificuldade" value="{{ request.get.dificuldade }}">
-                          <option>Indefinido</option>
-                          <option>1</option>
-                          <option>2</option>
-                          <option>3</option>
-                          <option>4</option>
-                          <option>5</option>
+                          <option value="Indefinido">Indefinido</option>
+                          <option value="F">Fácil</option>
+                          <option value="M">Média</option>
+                          <option value="D">Difícil</option>
                         </select>
                       </div>
                     </div>
@@ -148,18 +146,26 @@
                     <input type="text" class="form-control" name="turma" value="{{ request.get.turma }}" id="exampleFormControlSelect1" placeholder="Informe o nome da turma para o cabeçalho">
                   </div>
                   <div class="col">
-                    <div class="custom-file">
-                      <label class="custom-file-label" for="inputGroupFile04">Logo da Instituição</label>
-                      <input type="text" class="form-control" name="logo_url" value="{{ request.get.logo_url }}" id="exampleFormControlSelect1" placeholder="Cole a URL da logo">
-                    </div>
+                    <label for="exampleFormControlSelect1">Logo</label>
+                    <select type="search" class="form-control" name="nome_logo" value="{{ request.get.nome_logo }}" id="exampleFormControlSelect1" placeholder="Pesquise o nome do logo">
+                    {% for logo in logos %}
+                      <option>{{ logo.nome }}</option>
+                    {% endfor %}
+                    </select>
                   </div>
                   <div class="col">
-                    <div class="input-group">
-                      <div class="custom-file">
-                        <label class="custom-file-label" for="inputGroupFile04">Cabeçalho personalizado</label>
-                        <input type="file" class="custom-file-input form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04">
-                      </div>
-                    </div>
+                    <label for="exampleFormControlSelect1">Tipo prova</label>
+                    <select class="form-control" id="exampleFormControlSelect1" name="tipo_prova" value="{{ request.get.tipo_prova }}">
+                      <option value="mensal">Mensal</option>
+                      <option value="bimestral">Bimestral</option>
+                    </select>
+                  </div>
+                  <div class="col">
+                    <label for="exampleFormControlSelect1">Bimestre</label>
+                    <select class="form-control" id="exampleFormControlSelect1" name="bimestre" value="{{ request.get.bimestre }}">
+                      <option>1º Bimestre</option>
+                      <option>2º Bimestre</option>
+                    </select>
                   </div>
                 </div>
                 <div class="row">
