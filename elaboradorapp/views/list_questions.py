@@ -1,29 +1,23 @@
 from django.views.generic import ListView
-from .models import Question, Disciplina, Conteudo, Logo
-import datetime
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
+from elaboradorapp.models import Question, Disciplina, Conteudo, Logo
 from django.db.models import Q
-
-class ElaboradorApp:
-    def __init__(self):
-        self.disciplinas = Disciplina.objects.all()
-        self.conteudos = Conteudo.objects.all()
-        self.logos = Logo.objects.all()
-
-    @login_required(login_url='/admin/')
-    def index(request):
-        return render(request, 'elaboradorapp/index.html', {
-            'disciplinas': Disciplina.objects.all(),
-            'conteudos': Conteudo.objects.all(),
-            'logos': Logo.objects.all(),
-        })
+import datetime
 
 class ListarQuestoes(ListView):
     model = Question
     template_name = 'elaboradorapp/listar_questoes.html'
     
     def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context['nome_professor'] = self.request.GET.get('nome_professor')
+        context['tipo_prova'] = self.request.GET.get('tipo_prova')
+        context['observacao1'] = self.request.GET.get('observacao_1')
+        context['observacao2'] = self.request.GET.get('observacao_2')
+        context['observacao3'] = self.request.GET.get('observacao_3')
+        context['curso'] = self.request.GET.get('curso')
+        context['turma'] = self.request.GET.get('turma')
+        context['bimestre'] = self.request.GET.get('bimestre')
 
         disciplina_escolhida = self.request.GET.get('disciplina')
         quantidade_questoes = self.request.GET.get('quantidade_questoes')
@@ -34,7 +28,6 @@ class ListarQuestoes(ListView):
         dificuldade_escolhida = self.request.GET.get('dificuldade')
         nome_logo = self.request.GET.get('nome_logo')
 
-        context = super().get_context_data(**kwargs)
         conteudo = Conteudo.objects.filter(nome=conteudo_escolhido).first() 
         segundo_conteudo = Conteudo.objects.filter(nome=segundo_conteudo).first()
         terceiro_conteudo = Conteudo.objects.filter(nome=terceiro_conteudo).first()
@@ -75,7 +68,6 @@ class ListarQuestoes(ListView):
             'dificeis_primeiro_conteudo': Question.objects.filter(
                 disciplina=disciplina,
                 conteudo=conteudo,
-                serie=serie_escolhida,
                 dificuldade='D'
             ).filter(
                 Q(serie=serie_escolhida) if serie_escolhida != 'Indefinido' else Q()
@@ -137,8 +129,11 @@ class ListarQuestoes(ListView):
                 Q(serie=serie_escolhida) if serie_escolhida != 'Indefinido' else Q()
             ),
         }
+
+        print(dictionary_questions['dificeis_primeiro_conteudo'])
         
         questoes = None
+        questoes_primeiro_conteudo = None
         questoes_segundo_conteudo = None
         questoes_terceiro_conteudo = None
 
@@ -148,10 +143,10 @@ class ListarQuestoes(ListView):
                 if dificuldade_escolhida == 'F':
                     questoes_primeiro_conteudo = dictionary_questions['primeiro_conteudo'] | dictionary_questions['medias_primeiro_conteudo'].order_by('?')[:int(len(dictionary_questions['medias_primeiro_conteudo']) * 0.5)]
                     questoes_primeiro_conteudo = questoes_primeiro_conteudo.order_by('?')
-                if dificuldade_escolhida == 'M':
+                elif dificuldade_escolhida == 'M':
                     questoes_primeiro_conteudo = dictionary_questions['primeiro_conteudo'] | dictionary_questions['dificeis_primeiro_conteudo'].order_by('?')[:int(len(dictionary_questions['dificeis_primeiro_conteudo']) * 0.5)] | dictionary_questions['faceis_primeiro_conteudo'].order_by('?')[:int(len(dictionary_questions['faceis_primeiro_conteudo']) * 0.5)]
                     questoes_primeiro_conteudo = questoes_primeiro_conteudo.order_by('?')
-                if dificuldade_escolhida == 'D':
+                elif dificuldade_escolhida == 'D':
                     questoes_primeiro_conteudo = dictionary_questions['primeiro_conteudo'] | dictionary_questions['medias_primeiro_conteudo'].order_by('?')[:int(len(dictionary_questions['medias_primeiro_conteudo']) * 0.5)]
                     questoes_primeiro_conteudo = questoes_primeiro_conteudo.order_by('?')
                 qtd_conteudos += 1
@@ -160,10 +155,10 @@ class ListarQuestoes(ListView):
                 if dificuldade_escolhida == 'F':
                     questoes_segundo_conteudo = dictionary_questions['segundo_conteudo'] | dictionary_questions['medias_segundo_conteudo'].order_by('?')[:int(len(dictionary_questions['medias_segundo_conteudo']) * 0.5)]
                     questoes_segundo_conteudo = questoes_segundo_conteudo.order_by('?')    
-                if dificuldade_escolhida == 'M':
+                elif dificuldade_escolhida == 'M':
                     questoes_segundo_conteudo = dictionary_questions['segundo_conteudo'] | dictionary_questions['dificeis_segundo_conteudo'].order_by('?')[:int(len(dictionary_questions['dificeis_segundo_conteudo']) * 0.5)] | dictionary_questions['faceis_segundo_conteudo'].order_by('?')[:int(len(dictionary_questions['faceis_segundo_conteudo']) * 0.5)]
                     questoes_segundo_conteudo = questoes_segundo_conteudo.order_by('?')    
-                if dificuldade_escolhida == 'D':
+                elif dificuldade_escolhida == 'D':
                     questoes_segundo_conteudo = dictionary_questions['segundo_conteudo'] | dictionary_questions['medias_segundo_conteudo'].order_by('?')[:int(len(dictionary_questions['medias_segundo_conteudo']) * 0.5)]
                     questoes_segundo_conteudo = questoes_segundo_conteudo.order_by('?')
                 qtd_conteudos += 1
@@ -172,65 +167,86 @@ class ListarQuestoes(ListView):
                 if dificuldade_escolhida == 'F':
                     questoes_terceiro_conteudo = dictionary_questions['terceiro_conteudo'] | dictionary_questions['medias_terceiro_conteudo'].order_by('?')[:int(len(dictionary_questions['medias_terceiro_conteudo']) * 0.5)]
                     questoes_terceiro_conteudo = questoes_terceiro_conteudo.order_by('?')
-                if dificuldade_escolhida == 'M':
+                elif dificuldade_escolhida == 'M':
                     questoes_terceiro_conteudo = dictionary_questions['terceiro_conteudo'] | dictionary_questions['dificeis_terceiro_conteudo'].order_by('?')[:int(len(dictionary_questions['dificeis_terceiro_conteudo']) * 0.5)] | dictionary_questions['faceis_terceiro_conteudo'].order_by('?')[:int(len(dictionary_questions['faceis_terceiro_conteudo']) * 0.5)]
                     questoes_terceiro_conteudo = questoes_terceiro_conteudo.order_by('?')
-                if dificuldade_escolhida == 'D':
+                elif dificuldade_escolhida == 'D':
                     questoes_terceiro_conteudo = dictionary_questions['terceiro_conteudo'] | dictionary_questions['medias_terceiro_conteudo'].order_by('?')[:int(len(dictionary_questions['medias_terceiro_conteudo']) * 0.5)]
                     questoes_terceiro_conteudo = questoes_terceiro_conteudo.order_by('?')
                 qtd_conteudos += 1
 
-            if qtd_conteudos != 0 and questoes_primeiro_conteudo:
+            if qtd_conteudos != 0 and (questoes_primeiro_conteudo or questoes_segundo_conteudo or questoes_terceiro_conteudo):
                 if int(quantidade_questoes) % qtd_conteudos == 0:
-                    questoes_primeiro_conteudo = questoes_primeiro_conteudo.order_by('?')[:int(quantidade_questoes) // qtd_conteudos]
+                    if questoes_primeiro_conteudo:
+                        questoes_primeiro_conteudo = questoes_primeiro_conteudo.order_by('?')[:int(quantidade_questoes) // qtd_conteudos]
                     if questoes_segundo_conteudo:
                         questoes_segundo_conteudo = questoes_segundo_conteudo.order_by('?')[:int(quantidade_questoes) // qtd_conteudos]
                     if questoes_terceiro_conteudo:
                         questoes_terceiro_conteudo = questoes_terceiro_conteudo.order_by('?')[:int(quantidade_questoes) // qtd_conteudos]
                 else:
-                    questoes_primeiro_conteudo = questoes_primeiro_conteudo.order_by('?')[:int(quantidade_questoes) // qtd_conteudos + 1]
+                    if questoes_primeiro_conteudo:
+                        questoes_primeiro_conteudo = questoes_primeiro_conteudo.order_by('?')[:int(quantidade_questoes) // qtd_conteudos + 1]
                     if questoes_segundo_conteudo:
                         questoes_segundo_conteudo = questoes_segundo_conteudo.order_by('?')[:int(quantidade_questoes) // qtd_conteudos]
                     if questoes_terceiro_conteudo:
                         questoes_terceiro_conteudo = questoes_terceiro_conteudo.order_by('?')[:int(quantidade_questoes) // qtd_conteudos]
                 
-                questoes = questoes_primeiro_conteudo
+                if questoes_primeiro_conteudo:
+                    questoes = questoes_primeiro_conteudo
                 if questoes_segundo_conteudo:
-                    questoes = questoes | questoes_segundo_conteudo
+                    if questoes_primeiro_conteudo:
+                        questoes = questoes | questoes_segundo_conteudo
+                    else:
+                        questoes = questoes_segundo_conteudo
                 if questoes_terceiro_conteudo:
-                    questoes = questoes | questoes_terceiro_conteudo
+                    if questoes_primeiro_conteudo or questoes_segundo_conteudo:
+                        questoes = questoes | questoes_terceiro_conteudo
+                    else:
+                        questoes = questoes_terceiro_conteudo
 
         if dificuldade_escolhida == 'Indefinido' and serie_escolhida != 'Indefinido' or serie_escolhida == 'Indefinido' and dificuldade_escolhida == 'Indefinido':
             qtd_conteudos = 0
             if dictionary_questions['primeiro_conteudo']:
                 questoes_primeiro_conteudo = dictionary_questions['primeiro_conteudo']
+                questoes_primeiro_conteudo = questoes_primeiro_conteudo.order_by('?')
                 qtd_conteudos += 1
             if dictionary_questions['segundo_conteudo']:
                 questoes_segundo_conteudo = dictionary_questions['segundo_conteudo']
+                questoes_segundo_conteudo = questoes_segundo_conteudo.order_by('?')
                 qtd_conteudos += 1
             if dictionary_questions['terceiro_conteudo']:
                 questoes_terceiro_conteudo = dictionary_questions['terceiro_conteudo']
+                questoes_terceiro_conteudo = questoes_terceiro_conteudo.order_by('?')
                 qtd_conteudos += 1
 
-            if qtd_conteudos != 0 and questoes_primeiro_conteudo:
+            if qtd_conteudos != 0 and (questoes_primeiro_conteudo or questoes_segundo_conteudo or questoes_terceiro_conteudo):
                 if int(quantidade_questoes) % qtd_conteudos == 0:
-                    questoes_primeiro_conteudo = questoes_primeiro_conteudo.order_by('?')[:int(quantidade_questoes) // qtd_conteudos]
+                    if questoes_primeiro_conteudo:
+                        questoes_primeiro_conteudo = questoes_primeiro_conteudo.order_by('?')[:int(quantidade_questoes) // qtd_conteudos]
                     if questoes_segundo_conteudo:
                         questoes_segundo_conteudo = questoes_segundo_conteudo.order_by('?')[:int(quantidade_questoes) // qtd_conteudos]
                     if questoes_terceiro_conteudo:
                         questoes_terceiro_conteudo = questoes_terceiro_conteudo.order_by('?')[:int(quantidade_questoes) // qtd_conteudos]
                 else:
-                    questoes_primeiro_conteudo = questoes_primeiro_conteudo.order_by('?')[:int(quantidade_questoes) // qtd_conteudos + 1]
+                    if questoes_primeiro_conteudo:
+                        questoes_primeiro_conteudo = questoes_primeiro_conteudo.order_by('?')[:int(quantidade_questoes) // qtd_conteudos + 1]
                     if questoes_segundo_conteudo:
                         questoes_segundo_conteudo = questoes_segundo_conteudo.order_by('?')[:int(quantidade_questoes) // qtd_conteudos]
                     if questoes_terceiro_conteudo:
                         questoes_terceiro_conteudo = questoes_terceiro_conteudo.order_by('?')[:int(quantidade_questoes) // qtd_conteudos]
                 
-                questoes = questoes_primeiro_conteudo
+                if questoes_primeiro_conteudo:
+                    questoes = questoes_primeiro_conteudo
                 if questoes_segundo_conteudo:
-                    questoes = questoes | questoes_segundo_conteudo
+                    if questoes_primeiro_conteudo:
+                        questoes = questoes | questoes_segundo_conteudo
+                    else:
+                        questoes = questoes_segundo_conteudo
                 if questoes_terceiro_conteudo:
-                    questoes = questoes | questoes_terceiro_conteudo
+                    if questoes_primeiro_conteudo or questoes_segundo_conteudo:
+                        questoes = questoes | questoes_terceiro_conteudo
+                    else:
+                        questoes = questoes_terceiro_conteudo
 
         data = self.request.GET.get('data')
 
@@ -243,18 +259,6 @@ class ListarQuestoes(ListView):
             'nome_conteudo': conteudo_escolhido,
             'data': data,
             'logo': logo,
-            'nome_professor': self.request.GET.get('nome_professor'),
-            'tipo_prova': self.request.GET.get('tipo_prova'),
-            'observacao1': self.request.GET.get('observacao_1'),
-            'observacao2': self.request.GET.get('observacao_2'),
-            'observacao3': self.request.GET.get('observacao_3'),
-            'curso': self.request.GET.get('curso'),
-            'turma': self.request.GET.get('turma'),
-            'bimestre': self.request.GET.get('bimestre')
         })
 
         return context
-
-class Sobre(ListView):
-    model = Question
-    template_name = 'elaboradorapp/sobre.html'
