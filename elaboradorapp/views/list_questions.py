@@ -129,8 +129,6 @@ class ListarQuestoes(ListView):
                 Q(serie=serie_escolhida) if serie_escolhida != 'Indefinido' else Q()
             ),
         }
-
-        print(dictionary_questions['dificeis_primeiro_conteudo'])
         
         questoes = None
         questoes_primeiro_conteudo = None
