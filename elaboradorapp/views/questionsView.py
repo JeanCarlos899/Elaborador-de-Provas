@@ -2,8 +2,9 @@ from django.views.generic import ListView
 from elaboradorapp.models import Question, Disciplina, Conteudo, Logo
 from django.db.models import Q
 import datetime
+from .questions import GetQuestions
 
-class ListarQuestoes(ListView):
+class QuestionsView(ListView):
     model = Question
     template_name = 'elaboradorapp/listar_questoes.html'
     
@@ -274,52 +275,16 @@ class ListarQuestoes(ListView):
                     ).order_by('?')
                 qtd_conteudos += 1
 
-            if qtd_conteudos != 0 and (questoes_primeiro_conteudo or questoes_segundo_conteudo or questoes_terceiro_conteudo):
-                
-                # Se a quantidade de questões for divisível pela quantidade de conteúdos, então é possível distribuir igualmente
-                # Se não for, então é atribuida mais uma questão do primeiro conteúdo (o principal)
-                
-                if int(quantidade_questoes) % qtd_conteudos == 0:
-                    if questoes_primeiro_conteudo:
-
-                        # Caso haja a questão do conteúdo, então é obtida uma fatia do queryset com a quantidade de questões
-                        # dividida pela quantidade de conteúdos, através de uma divisão inteira
-
-                        # O mesmo é feito para os conteúdos posteriores, caso existam
-
-                        questoes_primeiro_conteudo = questoes_primeiro_conteudo.order_by('?')[:int(quantidade_questoes) // qtd_conteudos]
-                    if questoes_segundo_conteudo:
-                        questoes_segundo_conteudo = questoes_segundo_conteudo.order_by('?')[:int(quantidade_questoes) // qtd_conteudos]
-                    if questoes_terceiro_conteudo:
-                        questoes_terceiro_conteudo = questoes_terceiro_conteudo.order_by('?')[:int(quantidade_questoes) // qtd_conteudos]
-                else:
-
-                    # Caso a quantidade de questões não seja divisível pela quantidade de conteúdos, então é atribuida mais uma
-                    # questão do primeiro conteúdo (o principal)
-
-                    if questoes_primeiro_conteudo:
-                        questoes_primeiro_conteudo = questoes_primeiro_conteudo.order_by('?')[:int(quantidade_questoes) // qtd_conteudos + 1]
-                    if questoes_segundo_conteudo:
-                        questoes_segundo_conteudo = questoes_segundo_conteudo.order_by('?')[:int(quantidade_questoes) // qtd_conteudos]
-                    if questoes_terceiro_conteudo:
-                        questoes_terceiro_conteudo = questoes_terceiro_conteudo.order_by('?')[:int(quantidade_questoes) // qtd_conteudos]
-                
-
-                # Após a distribuição das questões, é feita a união dos querysets, para que seja possível retornar um único queryset
-                if questoes_primeiro_conteudo:
-                    questoes = questoes_primeiro_conteudo
-                if questoes_segundo_conteudo:
-                    # Se já houver questões do primeiro conteúdo, então é feita a união com as questões do segundo conteúdo
-                    if questoes_primeiro_conteudo:
-                        questoes = questoes | questoes_segundo_conteudo
-                    else:
-                        questoes = questoes_segundo_conteudo
-                if questoes_terceiro_conteudo:
-                    # Se já houver questões do primeiro ou segundo conteúdo, então é feita a união com as questões do terceiro conteúdo
-                    if questoes_primeiro_conteudo or questoes_segundo_conteudo:
-                        questoes = questoes | questoes_terceiro_conteudo
-                    else:
-                        questoes = questoes_terceiro_conteudo
+            # Aqui é feita a chamada da função que irá retornar as questões de acordo com a quantidade
+            # de conteúdos escolhidos e a quantidade de questões que o usuário deseja
+            
+            questions = GetQuestions(
+                qtd_conteudos, 
+                quantidade_questoes, 
+                questoes_primeiro_conteudo, 
+                questoes_segundo_conteudo, 
+                questoes_terceiro_conteudo
+            ).get_questions()
 
         else:
 
@@ -341,35 +306,13 @@ class ListarQuestoes(ListView):
                 questoes_terceiro_conteudo = questoes_terceiro_conteudo.order_by('?')
                 qtd_conteudos += 1
 
-            if qtd_conteudos != 0 and (questoes_primeiro_conteudo or questoes_segundo_conteudo or questoes_terceiro_conteudo):
-                if int(quantidade_questoes) % qtd_conteudos == 0:
-                    if questoes_primeiro_conteudo:
-                        questoes_primeiro_conteudo = questoes_primeiro_conteudo.order_by('?')[:int(quantidade_questoes) // qtd_conteudos]
-                    if questoes_segundo_conteudo:
-                        questoes_segundo_conteudo = questoes_segundo_conteudo.order_by('?')[:int(quantidade_questoes) // qtd_conteudos]
-                    if questoes_terceiro_conteudo:
-                        questoes_terceiro_conteudo = questoes_terceiro_conteudo.order_by('?')[:int(quantidade_questoes) // qtd_conteudos]
-                else:
-                    if questoes_primeiro_conteudo:
-                        questoes_primeiro_conteudo = questoes_primeiro_conteudo.order_by('?')[:int(quantidade_questoes) // qtd_conteudos + 1]
-                    if questoes_segundo_conteudo:
-                        questoes_segundo_conteudo = questoes_segundo_conteudo.order_by('?')[:int(quantidade_questoes) // qtd_conteudos]
-                    if questoes_terceiro_conteudo:
-                        questoes_terceiro_conteudo = questoes_terceiro_conteudo.order_by('?')[:int(quantidade_questoes) // qtd_conteudos]
-                
-                if questoes_primeiro_conteudo:
-                    questoes = questoes_primeiro_conteudo
-                if questoes_segundo_conteudo:
-                    if questoes_primeiro_conteudo:
-                        questoes = questoes | questoes_segundo_conteudo
-                    else:
-                        questoes = questoes_segundo_conteudo
-                if questoes_terceiro_conteudo:
-                    if questoes_primeiro_conteudo or questoes_segundo_conteudo:
-                        questoes = questoes | questoes_terceiro_conteudo
-                    else:
-                        questoes = questoes_terceiro_conteudo
-
+            questions = GetQuestions(
+                qtd_conteudos, 
+                quantidade_questoes, 
+                questoes_primeiro_conteudo, 
+                questoes_segundo_conteudo, 
+                questoes_terceiro_conteudo
+            ).get_questions()
 
         # Recebendo o valor da data escolhida pelo usuário
         data = self.request.GET.get('data')
@@ -381,7 +324,7 @@ class ListarQuestoes(ListView):
 
         # Atualizando os valores processados no contexto
         context.update({
-            'questoes': questoes,
+            'questoes': questions,
             'nome_disciplina': disciplina_escolhida,
             'nome_conteudo': conteudo_escolhido,
             'data': data,
