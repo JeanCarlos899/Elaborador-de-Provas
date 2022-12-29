@@ -38,7 +38,7 @@ class GetQuestions:
             else:
 
                 # Caso a quantidade de questões não seja divisível pela quantidade de conteúdos, então é atribuida mais uma
-                # questão do primeiro conteúdo (o principal)
+                # questão do primeiro conteúdo (o principal) para a quantidade de questões bata com a selecionada pelo usuário
 
                 if self.questoes_primeiro_conteudo:
                     self.questoes_primeiro_conteudo = self.questoes_primeiro_conteudo.order_by('?')[:int(qtd_questoes) // qtd_conteudos + 1]

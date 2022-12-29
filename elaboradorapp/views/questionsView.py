@@ -174,13 +174,13 @@ class QuestionsView(ListView):
                     # conteúdo), e também para as seleções de questões de dificuldade média e difícil
 
                     questoes_primeiro_conteudo = (
-                        dictionary_questions['primeiro_conteudo'] | 
-                        dictionary_questions['medias_primeiro_conteudo'].order_by('?')[
+                        dictionary_questions['primeiro_conteudo'] | # Unindo as questões do primeiro conteúdo
+                        dictionary_questions['medias_primeiro_conteudo'].order_by('?')[ 
                             :int(
                                 len(dictionary_questions['medias_primeiro_conteudo']) * 0.5
                             )
-                        ]
-                    ).order_by('?')
+                        ] 
+                    ).order_by('?') # Ordenando aleatoriamente
                 elif dificuldade_escolhida == 'M':
                     questoes_primeiro_conteudo = (
                         dictionary_questions['primeiro_conteudo'] | 
