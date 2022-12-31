@@ -1,34 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-difficulty_question = (
-    ('F', 'Fácil'),
-    ('M', 'Média'),
-    ('D', 'Difícil'),
-)
-
-series = (
-    ('1', '1'),
-    ('2', '2'),
-    ('3', '3'),
-)
-
-
-alternativas = (
-    ('A', 'A'),
-    ('B', 'B'),
-    ('C', 'C'),
-    ('D', 'D'),
-    ('E', 'E'),
-)
-
-class Disciplina(models.Model): #country
+class Disciplina(models.Model): 
     nome = models.CharField(max_length=30)
 
     def __str__(self):
         return self.nome
 
-class Conteudo(models.Model): #city
+class Conteudo(models.Model): 
     disciplina = models.ForeignKey(Disciplina, on_delete=models.CASCADE)
     nome = models.CharField(max_length=30)
 
@@ -47,32 +26,173 @@ class Logo(models.Model):
 
 
 class Question(models.Model): 
-    autor = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='Vincular questão')
-    serie = models.CharField('Série', max_length=100, choices = series, blank=True)
-    dificuldade = models.CharField('Dificuldade', max_length = 5, choices = difficulty_question, blank=True)
-    disciplina = models.ForeignKey(Disciplina, on_delete=models.SET_NULL, null=True, verbose_name='Disciplina')
-    conteudo = models.ForeignKey(Conteudo, on_delete=models.SET_NULL, null=True, verbose_name='Conteúdo')
-    enunciado = models.TextField('Enunciado', max_length=5000)
-    imagem = models.ImageField('Imagem', upload_to='images/', null=True, blank=True)
-    comando = models.TextField('Comando', max_length=5000, null=True, blank=True)
-    alternativa_a = models.TextField('Alternativa A', max_length=5000, null=True, blank=True)
-    imagem_a = models.ImageField('Imagem A', upload_to='images/', null=True, blank=True)
-    alternativa_b = models.TextField('Alternativa B', max_length=5000, null=True, blank=True)
-    imagem_b = models.ImageField('Imagem B', upload_to='images/', null=True, blank=True)
-    alternativa_c = models.TextField('Alternativa C', max_length=5000, null=True, blank=True)
-    imagem_c = models.ImageField('Imagem C', upload_to='images/', null=True, blank=True)
-    alternativa_d = models.TextField('Alternativa C', max_length=5000, null=True, blank=True)
-    imagem_d = models.ImageField('Imagem D', upload_to='images/', null=True, blank=True)
-    alternativa_e = models.TextField('Alternativa E', max_length=5000, null=True, blank=True)
-    imagem_e = models.ImageField('Imagem E', upload_to='images/', null=True, blank=True)
-    gabarito = models.CharField('Gabarito', max_length=5000, choices = alternativas)
 
+    vinculo = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL, 
+        null=True,
+        blank=True, 
+        verbose_name='Vínculo'
+    )
+
+    serie = models.CharField(
+        'série', 
+        max_length=100, 
+        blank=True,
+        choices = (
+            ('1', '1'),
+            ('2', '2'),
+            ('3', '3'),
+        )
+    )
+
+    dificuldade = models.CharField(
+        'dificuldade', 
+        max_length = 5, 
+        blank=True,
+        choices = (
+            ('F', 'Fácil'),
+            ('M', 'Média'),
+            ('D', 'Difícil')
+        )
+    )
+
+    disciplina = models.ForeignKey(
+        Disciplina, 
+        on_delete=models.SET_NULL, 
+        null=True, 
+        verbose_name='disciplina'
+    )
     
+    conteudo = models.ForeignKey(
+        Conteudo, 
+        on_delete=models.SET_NULL, 
+        null=True, 
+        verbose_name='conteúdo'
+    )
+
+    enunciado = models.TextField(
+        'enunciado', 
+        max_length=5000
+    )
+
+    imagem = models.ImageField(
+        'imagem', 
+        upload_to='images/', 
+        null=True, 
+        blank=True
+    )
+    
+    comando = models.TextField(
+        'comando', 
+        max_length=5000, 
+        null=True, 
+        blank=True
+    )
+
+    alternativa_a = models.TextField(
+        'alternativa A',
+        max_length=5000, 
+        null=True, 
+        blank=True
+    )
+
+    imagem_a = models.ImageField(
+        'imagem A',
+        upload_to='images/',
+        null=True,
+        blank=True
+    )
+
+    alternativa_b = models.TextField(
+        'alternativa B',
+        max_length=5000,
+        null=True,
+        blank=True
+    )
+
+    imagem_b = models.ImageField(
+        'imagem B',
+        upload_to='images/',
+        null=True,
+        blank=True
+    )
+
+    alternativa_c = models.TextField(
+        'alternativa C',
+        max_length=5000,
+        null=True,
+        blank=True
+    )
+
+    imagem_c = models.ImageField(
+        'imagem C',
+        upload_to='images/',
+        null=True,
+        blank=True
+    )
+
+    alternativa_d = models.TextField(
+        'alternativa C',
+        max_length=5000,
+        null=True,
+        blank=True
+    )
+
+    imagem_d = models.ImageField(
+        'imagem D',
+        upload_to='images/',
+        null=True,
+        blank=True
+    )
+
+    alternativa_e = models.TextField(
+        'alternativa E',
+        max_length=5000,
+        null=True,
+        blank=True
+    )
+
+    imagem_e = models.ImageField(
+        'imagem E',
+        upload_to='images/',
+        null=True,
+        blank=True
+    )
+    
+    gabarito = models.CharField(
+        'gabarito',
+        max_length=5000, 
+        blank=True,
+        choices = (    
+            ('A', 'A'),
+            ('B', 'B'),
+            ('C', 'C'),
+            ('D', 'D'),
+            ('E', 'E')
+        ) 
+    )
+
+    criador = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name='criador',
+        related_name='criador'
+    )
+
     def __str__(self):
-        return str(self.disciplina) + ' - ' + str(self.conteudo) + ' - ' + str(self.enunciado[:100]) + '...'
+        return (
+            str(self.disciplina) + 
+            ' - ' + 
+            str(self.conteudo) + 
+            ' - ' +
+            str(self.enunciado[:100]) + 
+            '...'
+            )
     
     class Meta:
         verbose_name = u'questão'
         verbose_name_plural = u'questões'
         ordering = ['disciplina', 'conteudo']
-        

@@ -71,9 +71,9 @@ class QuestionsView(ListView):
                 Q(serie=serie_escolhida) if serie_escolhida != 'Indefinido' else Q(),
                 Q(dificuldade=dificuldade_escolhida) if dificuldade_escolhida != 'Indefinido' else Q(),
 
-                # Se o autor (atributo de Question) for igual ao usuário
+                # Se o vinculo (atributo de Question) for igual ao usuário
                 # logado ou igual a None, a questão será exibida
-                Q(autor=self.get_userId()) | Q(autor=None)
+                Q(vinculo=self.get_userId()) | Q(vinculo=None)
             ).order_by('?'),
             'faceis_primeiro_conteudo': Question.objects.filter(
                 disciplina=disciplina,
@@ -81,7 +81,7 @@ class QuestionsView(ListView):
                 dificuldade='F'
             ).filter(
                 Q(serie=serie_escolhida) if serie_escolhida != 'Indefinido' else Q(),
-                Q(autor=self.get_userId()) | Q(autor=None)
+                Q(vinculo=self.get_userId()) | Q(vinculo=None)
             ).order_by('?'),
             'medias_primeiro_conteudo': Question.objects.filter(
                 disciplina=disciplina,
@@ -89,7 +89,7 @@ class QuestionsView(ListView):
                 dificuldade='M'
             ).filter(
                 Q(serie=serie_escolhida) if serie_escolhida != 'Indefinido' else Q(),
-                Q(autor=self.get_userId()) | Q(autor=None)
+                Q(vinculo=self.get_userId()) | Q(vinculo=None)
             ).order_by('?'),
             'dificeis_primeiro_conteudo': Question.objects.filter(
                 disciplina=disciplina,
@@ -97,7 +97,7 @@ class QuestionsView(ListView):
                 dificuldade='D'
             ).filter(
                 Q(serie=serie_escolhida) if serie_escolhida != 'Indefinido' else Q(),
-                Q(autor=self.get_userId()) | Q(autor=None)
+                Q(vinculo=self.get_userId()) | Q(vinculo=None)
             ).order_by('?'),
             'segundo_conteudo': Question.objects.filter(
                 disciplina=disciplina,
@@ -105,7 +105,7 @@ class QuestionsView(ListView):
             ).filter(
                 Q(serie=serie_escolhida) if serie_escolhida != 'Indefinido' else Q(),
                 Q(dificuldade=dificuldade_escolhida) if dificuldade_escolhida != 'Indefinido' else Q(),
-                Q(autor=self.get_userId()) | Q(autor=None)
+                Q(vinculo=self.get_userId()) | Q(vinculo=None)
             ).order_by('?'),
             'faceis_segundo_conteudo': Question.objects.filter(
                 disciplina=disciplina,
@@ -113,7 +113,7 @@ class QuestionsView(ListView):
                 dificuldade='F'
             ).filter(
                 Q(serie=serie_escolhida) if serie_escolhida != 'Indefinido' else Q(),
-                Q(autor=self.get_userId()) | Q(autor=None)
+                Q(vinculo=self.get_userId()) | Q(vinculo=None)
             ).order_by('?'),
             'medias_segundo_conteudo': Question.objects.filter(
                 disciplina=disciplina,
@@ -121,7 +121,7 @@ class QuestionsView(ListView):
                 dificuldade='M'
             ).filter(
                 Q(serie=serie_escolhida) if serie_escolhida != 'Indefinido' else Q(),
-                Q(autor=self.get_userId()) | Q(autor=None)
+                Q(vinculo=self.get_userId()) | Q(vinculo=None)
             ).order_by('?'),
             'dificeis_segundo_conteudo': Question.objects.filter(
                 disciplina=disciplina,
@@ -129,7 +129,7 @@ class QuestionsView(ListView):
                 dificuldade='D'
             ).filter(
                 Q(serie=serie_escolhida) if serie_escolhida != 'Indefinido' else Q(),
-                Q(autor=self.get_userId()) | Q(autor=None)
+                Q(vinculo=self.get_userId()) | Q(vinculo=None)
             ).order_by('?'),
             'terceiro_conteudo': Question.objects.filter(
                 disciplina=disciplina,
@@ -137,7 +137,7 @@ class QuestionsView(ListView):
             ).filter(
                 Q(serie=serie_escolhida) if serie_escolhida != 'Indefinido' else Q(),
                 Q(dificuldade=dificuldade_escolhida) if dificuldade_escolhida != 'Indefinido' else Q(),
-                Q(autor=self.get_userId()) | Q(autor=None)
+                Q(vinculo=self.get_userId()) | Q(vinculo=None)
             ).order_by('?'),
             'faceis_terceiro_conteudo': Question.objects.filter(
                 disciplina=disciplina,
@@ -145,7 +145,7 @@ class QuestionsView(ListView):
                 dificuldade='F'
             ).filter(
                 Q(serie=serie_escolhida) if serie_escolhida != 'Indefinido' else Q(),
-                Q(autor=self.get_userId()) | Q(autor=None)
+                Q(vinculo=self.get_userId()) | Q(vinculo=None)
             ).order_by('?'),
             'medias_terceiro_conteudo': Question.objects.filter(
                 disciplina=disciplina,
@@ -153,7 +153,7 @@ class QuestionsView(ListView):
                 dificuldade='M'
             ).filter(
                 Q(serie=serie_escolhida) if serie_escolhida != 'Indefinido' else Q(),
-                Q(autor=self.get_userId()) | Q(autor=None)
+                Q(vinculo=self.get_userId()) | Q(vinculo=None)
             ).order_by('?'),
             'dificeis_terceiro_conteudo': Question.objects.filter(
                 disciplina=disciplina,
@@ -161,7 +161,7 @@ class QuestionsView(ListView):
                 dificuldade='D'
             ).filter(
                 Q(serie=serie_escolhida) if serie_escolhida != 'Indefinido' else Q(),
-                Q(autor=self.get_userId()) | Q(autor=None)
+                Q(vinculo=self.get_userId()) | Q(vinculo=None)
             ).order_by('?'),
         }
 
