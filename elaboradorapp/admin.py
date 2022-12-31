@@ -7,11 +7,8 @@ from django.contrib.auth.models import Group
 
 class QuestionAdmin(admin.ModelAdmin):
     list_display = ('disciplina', 'conteudo', 'enunciado', 'dificuldade')
-    list_filter = ('disciplina', 'conteudo', 'dificuldade', 'serie', 'vinculo__username')
+    list_filter = ('disciplina', 'conteudo', 'dificuldade', 'serie', 'criador__username')
     search_fields = ['enunciado', 'disciplina__nome', 'conteudo__nome', 'dificuldade', 'serie', 'vinculo__username', 'criador__username']
-    search_fields_verbose_name = [
-        ('criador__username', 'Por criador'),
-    ]
     fields = [
         'vinculo',
         'serie',
