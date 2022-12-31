@@ -4,10 +4,11 @@ from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
 from django.contrib.auth.admin import GroupAdmin
 from django.contrib.auth.models import Group
+from django.db.models import Q
 
 class QuestionAdmin(admin.ModelAdmin):
     list_display = ('disciplina', 'conteudo', 'enunciado', 'dificuldade')
-    list_filter = ('disciplina', 'conteudo', 'dificuldade', 'serie', 'criador__username')
+    list_filter = ('disciplina', 'conteudo', 'dificuldade', 'serie', 'vinculo__username')
     search_fields = ['enunciado', 'disciplina__nome', 'conteudo__nome', 'dificuldade', 'serie', 'vinculo__username', 'criador__username']
     fields = [
         'vinculo',
@@ -60,6 +61,12 @@ class QuestionAdmin(admin.ModelAdmin):
     def save_model(self, request, obj, form, change):
         obj.criador = request.user
         super().save_model(request, obj, form, change)
+
+    def get_queryset(self, request):
+        qs = super().get_queryset(request)
+        if request.user.is_superuser:
+            return qs
+        return qs.filter(Q(vinculo=request.user) | Q(vinculo=None))
 
 class ConteudoAdmin(admin.ModelAdmin):
     list_display = ['nome', 'disciplina']
