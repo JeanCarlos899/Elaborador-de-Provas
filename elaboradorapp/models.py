@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 
 class Disciplina(models.Model): 
     nome = models.CharField(max_length=30)
+    criador = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
         return self.nome
@@ -10,6 +11,7 @@ class Disciplina(models.Model):
 class Conteudo(models.Model): 
     disciplina = models.ForeignKey(Disciplina, on_delete=models.CASCADE)
     nome = models.CharField(max_length=30)
+    criador = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
         return self.nome
@@ -20,6 +22,7 @@ class Conteudo(models.Model):
 class Logo(models.Model):
     nome = models.CharField(max_length=100)
     imagem = models.ImageField('imagem', upload_to='images/')
+    criador = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
         return self.nome
