@@ -117,16 +117,18 @@
                             <table class="table">
                             <thead class="text-center">
                                 <tr>
-                                <th scope="col">Questão</th>
-                                <th scope="col">Gabarito</th>
-                                <th scope="col">Conteúdo</th>
-                                <th scope="col">Dificuldade</th>
-                                <th scope="col">Tipo de questão</th>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Questão</th>
+                                    <th scope="col">Gabarito</th>
+                                    <th scope="col">Conteúdo</th>
+                                    <th scope="col">Dificuldade</th>
+                                    <th scope="col">Tipo de questão</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {% for questao in questoes %}
                                 <tr>
+                                    <td style="text-align: center; vertical-align: middle;">{{ questao.id }}</td>
                                     <td style="text-align: center; vertical-align: middle;">{{ forloop.counter }}</td>
                                     {% if questao.gabarito %}
                                     <td>{{ questao.gabarito }}</td>

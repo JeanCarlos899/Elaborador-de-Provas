@@ -3,14 +3,51 @@ from elaboradorapp.models import Question, Disciplina, Conteudo, Logo
 from django.db.models import Q
 import datetime
 from .questions import GetQuestions
+from django.shortcuts import redirect
 
 class QuestionsView(ListView):
     model = Question
     template_name = 'elaboradorapp/listar_questoes.html'
+    
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            # Redireciona o usuário para a página de login
+            return redirect('/admin/login/?next=/')
+        return super().dispatch(request, *args, **kwargs)
 
     def get_userId(self):
         if self.request.user.is_authenticated:
             return int(self.request.user.id)
+
+    def dictionary_filters(self, tipo_prova, serie_escolhida, dificuldade_escolhida=None):
+        if tipo_prova == '2':
+            qs = Q(vinculo=self.get_userId()) | Q(vinculo=None)
+            if serie_escolhida != 'Indefinido':
+                qs = qs & Q(serie=serie_escolhida)
+            if dificuldade_escolhida and dificuldade_escolhida != 'Indefinido':
+                qs = qs & Q(dificuldade=dificuldade_escolhida)
+            return qs
+        elif tipo_prova == '1':
+            qs = Q(vinculo=self.get_userId())
+            if serie_escolhida != 'Indefinido':
+                qs = qs & Q(serie=serie_escolhida)
+            if dificuldade_escolhida and dificuldade_escolhida != 'Indefinido':
+                qs = qs & Q(dificuldade=dificuldade_escolhida)
+            return qs
+        elif tipo_prova == '0':
+            qs = Q(vinculo=None)
+            if serie_escolhida != 'Indefinido':
+                qs = qs & Q(serie=serie_escolhida)
+            if dificuldade_escolhida and dificuldade_escolhida != 'Indefinido':
+                qs = qs & Q(dificuldade=dificuldade_escolhida)
+            return qs
+        else:
+            qs = Q(vinculo=None)
+            if serie_escolhida != 'Indefinido':
+                qs = qs & Q(serie=serie_escolhida)
+            if dificuldade_escolhida and dificuldade_escolhida != 'Indefinido':
+                qs = qs & Q(dificuldade=dificuldade_escolhida)
+            return qs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -34,6 +71,7 @@ class QuestionsView(ListView):
         serie_escolhida = self.request.GET.get('serie')
         dificuldade_escolhida = self.request.GET.get('dificuldade')
         nome_logo = self.request.GET.get('nome_logo')
+        tipo_prova = self.request.GET.get('radioTipoProva')
 
         # Filtrando os valores e recebendo o primeiro objeto da lista
         conteudo = Conteudo.objects.filter(nome=conteudo_escolhido).first() 
@@ -55,113 +93,84 @@ class QuestionsView(ListView):
         # Dicionário que armazenará as questões filtradas
         dictionary_questions = {
             'primeiro_conteudo': Question.objects.filter(
-
-                # Filtrando as questões pela disciplina e conteúdo, que é
-                # comum a todos os filtros. No entanto, o segunto filtro é 
-                # feito de acordo com suas particularidades
-
-                disciplina=disciplina, 
-                conteudo=conteudo, 
-            ).filter(
-
-                # Filtrando as questões pela série e dificuldade, que são
-                # opcionais. Caso não sejam selecionados, não serão filtrados.
-                # Sendo passado uma filtro vazio, o django não será alterado
-
-                Q(serie=serie_escolhida) if serie_escolhida != 'Indefinido' else Q(),
-                Q(dificuldade=dificuldade_escolhida) if dificuldade_escolhida != 'Indefinido' else Q(),
-
-                # Se o vinculo (atributo de Question) for igual ao usuário
-                # logado ou igual a None, a questão será exibida
-                Q(vinculo=self.get_userId()) | Q(vinculo=None)
+                Q(disciplina=disciplina),
+                Q(conteudo=conteudo),
+                self.dictionary_filters(tipo_prova, serie_escolhida, dificuldade_escolhida)
             ).order_by('?'),
+    
             'faceis_primeiro_conteudo': Question.objects.filter(
-                disciplina=disciplina,
-                conteudo=conteudo,
-                dificuldade='F'
-            ).filter(
-                Q(serie=serie_escolhida) if serie_escolhida != 'Indefinido' else Q(),
-                Q(vinculo=self.get_userId()) | Q(vinculo=None)
+                Q(disciplina=disciplina),
+                Q(conteudo=conteudo),
+                Q(dificuldade='F'),
+                self.dictionary_filters(tipo_prova, serie_escolhida)
             ).order_by('?'),
+
             'medias_primeiro_conteudo': Question.objects.filter(
-                disciplina=disciplina,
-                conteudo=conteudo,
-                dificuldade='M'
-            ).filter(
-                Q(serie=serie_escolhida) if serie_escolhida != 'Indefinido' else Q(),
-                Q(vinculo=self.get_userId()) | Q(vinculo=None)
+                Q(disciplina=disciplina),
+                Q(conteudo=conteudo),
+                Q(dificuldade='M'),
+                self.dictionary_filters(tipo_prova, serie_escolhida)
             ).order_by('?'),
+
             'dificeis_primeiro_conteudo': Question.objects.filter(
-                disciplina=disciplina,
-                conteudo=conteudo,
-                dificuldade='D'
-            ).filter(
-                Q(serie=serie_escolhida) if serie_escolhida != 'Indefinido' else Q(),
-                Q(vinculo=self.get_userId()) | Q(vinculo=None)
+                Q(disciplina=disciplina),
+                Q(conteudo=conteudo),
+                Q(dificuldade='D'),
+                self.dictionary_filters(tipo_prova, serie_escolhida)
             ).order_by('?'),
+
             'segundo_conteudo': Question.objects.filter(
-                disciplina=disciplina,
-                conteudo=segundo_conteudo,
-            ).filter(
-                Q(serie=serie_escolhida) if serie_escolhida != 'Indefinido' else Q(),
-                Q(dificuldade=dificuldade_escolhida) if dificuldade_escolhida != 'Indefinido' else Q(),
-                Q(vinculo=self.get_userId()) | Q(vinculo=None)
+                Q(disciplina=disciplina),
+                Q(conteudo=segundo_conteudo),
+                self.dictionary_filters(tipo_prova, serie_escolhida, dificuldade_escolhida) 
             ).order_by('?'),
+
             'faceis_segundo_conteudo': Question.objects.filter(
-                disciplina=disciplina,
-                conteudo=segundo_conteudo,
-                dificuldade='F'
-            ).filter(
-                Q(serie=serie_escolhida) if serie_escolhida != 'Indefinido' else Q(),
-                Q(vinculo=self.get_userId()) | Q(vinculo=None)
+                Q(disciplina=disciplina),
+                Q(conteudo=segundo_conteudo),
+                Q(dificuldade='F'),
+                self.dictionary_filters(tipo_prova, serie_escolhida)
             ).order_by('?'),
+
             'medias_segundo_conteudo': Question.objects.filter(
-                disciplina=disciplina,
-                conteudo=segundo_conteudo,
-                dificuldade='M'
-            ).filter(
-                Q(serie=serie_escolhida) if serie_escolhida != 'Indefinido' else Q(),
-                Q(vinculo=self.get_userId()) | Q(vinculo=None)
+                Q(disciplina=disciplina),
+                Q(conteudo=segundo_conteudo),
+                Q(dificuldade='M'),
+                self.dictionary_filters(tipo_prova, serie_escolhida)
             ).order_by('?'),
+
             'dificeis_segundo_conteudo': Question.objects.filter(
-                disciplina=disciplina,
-                conteudo=segundo_conteudo,
-                dificuldade='D'
-            ).filter(
-                Q(serie=serie_escolhida) if serie_escolhida != 'Indefinido' else Q(),
-                Q(vinculo=self.get_userId()) | Q(vinculo=None)
+                Q(disciplina=disciplina),
+                Q(conteudo=segundo_conteudo),
+                Q(dificuldade='D'),
+                self.dictionary_filters(tipo_prova, serie_escolhida)
             ).order_by('?'),
+
             'terceiro_conteudo': Question.objects.filter(
-                disciplina=disciplina,
-                conteudo=terceiro_conteudo,
-            ).filter(
-                Q(serie=serie_escolhida) if serie_escolhida != 'Indefinido' else Q(),
-                Q(dificuldade=dificuldade_escolhida) if dificuldade_escolhida != 'Indefinido' else Q(),
-                Q(vinculo=self.get_userId()) | Q(vinculo=None)
+                Q(disciplina=disciplina),
+                Q(conteudo=terceiro_conteudo),
+                self.dictionary_filters(tipo_prova, serie_escolhida, dificuldade_escolhida)
             ).order_by('?'),
+
             'faceis_terceiro_conteudo': Question.objects.filter(
-                disciplina=disciplina,
-                conteudo=terceiro_conteudo,
-                dificuldade='F'
-            ).filter(
-                Q(serie=serie_escolhida) if serie_escolhida != 'Indefinido' else Q(),
-                Q(vinculo=self.get_userId()) | Q(vinculo=None)
+                Q(disciplina=disciplina),
+                Q(conteudo=terceiro_conteudo),
+                Q(dificuldade='F'),
+                self.dictionary_filters(tipo_prova, serie_escolhida)
             ).order_by('?'),
+
             'medias_terceiro_conteudo': Question.objects.filter(
-                disciplina=disciplina,
-                conteudo=terceiro_conteudo,
-                dificuldade='M'
-            ).filter(
-                Q(serie=serie_escolhida) if serie_escolhida != 'Indefinido' else Q(),
-                Q(vinculo=self.get_userId()) | Q(vinculo=None)
+                Q(disciplina=disciplina),
+                Q(conteudo=terceiro_conteudo),
+                Q(dificuldade='M'),
+                self.dictionary_filters(tipo_prova, serie_escolhida)
             ).order_by('?'),
+
             'dificeis_terceiro_conteudo': Question.objects.filter(
-                disciplina=disciplina,
-                conteudo=terceiro_conteudo,
-                dificuldade='D'
-            ).filter(
-                Q(serie=serie_escolhida) if serie_escolhida != 'Indefinido' else Q(),
-                Q(vinculo=self.get_userId()) | Q(vinculo=None)
+                Q(disciplina=disciplina),
+                Q(conteudo=terceiro_conteudo),
+                Q(dificuldade='D'),
+                self.dictionary_filters(tipo_prova, serie_escolhida)
             ).order_by('?'),
         }
 

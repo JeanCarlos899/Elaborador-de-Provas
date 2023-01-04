@@ -7,10 +7,11 @@ from django.contrib.auth.models import Group
 from django.db.models import Q
 
 class QuestionAdmin(admin.ModelAdmin):
-    list_display = ('disciplina', 'conteudo', 'enunciado', 'dificuldade')
+    list_display = ('id', 'disciplina', 'conteudo', 'enunciado', 'dificuldade')
     list_filter = ('disciplina', 'conteudo', 'dificuldade', 'serie', 'vinculo__username')
-    search_fields = ['enunciado', 'disciplina__nome', 'conteudo__nome', 'dificuldade', 'serie', 'vinculo__username', 'criador__username']
+    search_fields = ['enunciado', 'disciplina__nome', 'conteudo__nome', 'dificuldade', 'serie', 'vinculo__username', 'criador__username', 'id']
     fields = [
+        'id',
         'vinculo',
         'serie',
         'dificuldade',
@@ -31,6 +32,7 @@ class QuestionAdmin(admin.ModelAdmin):
         'imagem_e',
         'gabarito',
     ]
+    readonly_fields = ['id']
 
     def has_change_permission(self, request, obj=None):
         if request.user.is_superuser:
