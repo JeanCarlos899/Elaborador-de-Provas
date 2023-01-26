@@ -14,3 +14,18 @@ h5 {
     margin-bottom: 1rem;
 }
 
+.toolbar {
+    display: none;
+}
+
+.configs {
+    display: none;
+}
+
+.navbar {
+    background: linear-gradient(to right, #b7293a, #2e2d83);
+}
+
+header {
+    user-select: none;
+}

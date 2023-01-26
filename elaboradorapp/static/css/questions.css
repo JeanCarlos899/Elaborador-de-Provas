@@ -1,0 +1,188 @@
+@import url('https://fonts.googleapis.com/css2?family= Artifika & display = swap');
+        
+
+/* configurações iniciais */
+
+body {
+    background-color: #f1f1f1;
+}
+
+.container {
+    width: 100%;
+}
+
+/* estilo de listagem das provas */
+
+.prova ::selection {
+    background: #80afe9;
+    color: rgb(0, 0, 0);
+}
+
+.prova {
+    background-color: white;
+    border-radius: 10px;
+    padding: 5%;
+    width: 70% !important;
+    align-items: center;
+}
+
+li {
+    margin: -7px;
+    padding: 0;
+}
+
+img {
+    cursor: pointer;
+}
+
+img:active {
+    transform: scale(0.95);
+    box-shadow: 0 0 10px #666;
+} 
+
+/* definindo a letra padrão da listagem de provas */
+
+p {
+    font-family: 'Artifika', serif !important;
+    font-size: 12px;
+}
+
+td {
+    font-family: 'Artifika', serif !important;
+    font-weight: bold;
+    font-size: 11px !important;
+}
+
+.col-2 label {
+    font-family: 'Artifika', serif !important;
+    font-size: 11px !important;
+}
+
+.col-2 input {
+    font-family: 'Artifika', serif !important;
+    font-size: 11px !important;
+}
+
+/* estilo do cabeçalho */
+
+.tg  {
+    border-collapse:separate;
+    border-spacing:1;
+}
+
+table, td {
+    border: 1px solid black;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    padding: 5px;
+}
+
+.tg td{
+    border-color:black;
+    border-style:double;
+    border-width:1px;
+    font-family:Arial, sans-serif;
+    font-size:14px;
+    overflow:hidden;
+    padding:6px 3px 1px 3px;
+    word-break:normal;
+}
+
+.tg th{
+    border-color:black;
+    border-style:solid;
+    border-width:1px;
+    font-family:Arial, sans-serif;
+    font-size:14px;
+    font-weight:normal;
+    overflow:hidden;
+    padding:10px 5px;
+    word-break:normal;
+}
+
+.tg .tg-baqh{
+    text-align:center;
+    vertical-align:top
+}
+
+.tg .tg-0lax{
+    text-align:left;
+    vertical-align:center
+}
+
+#nota {
+    text-align: center;
+    margin-top: -40px;
+}
+
+/* estilo da tabela do gabarito da prova */
+.table {
+    border-collapse: collapse;
+}
+
+.table td, .table th {
+    border: 0.5px solid #ddd;
+    padding: 8px;
+}
+
+.table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.table tr:hover {
+    background-color: #e9ecef;
+}
+
+.table-responsive {
+    overflow-x: auto;
+}
+
+.break {
+    page-break-before: always;
+}
+
+/* configurações do da impressão de prova */
+
+@media print {
+    header {
+        display: none !important;
+    }
+    .col-2 {
+        display: none !important;
+    }
+    .prova {
+        width: 100% !important;
+        padding: 0 !important;
+        margin-top: 0 !important;
+    }
+    .central {
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+        width: 100% !important;
+    }
+    .container {
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+        width: 100% !important;
+    }
+    body {
+        background-color: white;
+    }
+    #nota {
+        width: 100px !important;
+    }
+    #curso {
+        width: 380px !important;
+    }
+    #turma {
+        width: 150px !important;
+    }
+}
+
+/* configurações para celulars */
+
+@media screen and (max-width: 1080px) {
+    .prova {
+        width: 100% !important;
+    }
+}

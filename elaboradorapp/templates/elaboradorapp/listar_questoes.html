@@ -1,4 +1,3 @@
-
 {% extends "elaboradorapp/base.html" %}
 {% load static %}
 {% block title %}Avaliação {{ tipo_prova }} de {{ nome_disciplina }} - {{ turma }} - {{ curso }} - {{ data }}{% endblock %}
@@ -6,33 +5,32 @@
 {% block content %}
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'fontawesome-free-6.1.1-web/css/all.min.css' %}">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Artifika&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/questions.css' %}">
+    <link rel="stylesheet" href="{% static 'css/toolbar.css' %}">
 </head>
 <body>
     <div class="central mt-5">
         <div class="container mt-5">
             <div class="row">
-              <div class="col-1">
-              </div>
-              <div class="col-10">
-                {% if questoes %}
+                <div class="col-10 mt-5 mx-auto prova">
+                    {% if questoes %}
                     <table class="tg mt-0">
                         <thead>
                             <tr>
-                                <td class="tg-0lax" rowspan="4" style="width: 80px;"><img id="logo" src="{{ logo }}" alt="" width="80px"></td>
-                                <td class="tg-baqh" colspan="3">Avaliação {{ tipo_prova }} de {{ nome_disciplina }} - {{ bimestre }} </td>
+                                <td class="tg-0lax" rowspan="4" style="width: 80px;"><img id="logo" src="{{ logo }}"
+                                        alt="" width="80px"></td>
+                                <td class="tg-0lax text-center" colspan="3">Avaliação {{ tipo_prova }} de {{ nome_disciplina }} - {{ bimestre }} </td>
                             </tr>
                             <tr>
                                 <td class="tg-0lax" id="curso" style="width: 350px;">Curso: {{ curso }}</td>
                                 <td class="tg-0lax" id="turma" style="width: 200px;">Turma: {{ turma }}</td>
-                                <td class="tg-0lax" id="nota" rowspan="3" style="width: 150px; text-align: start !important;">
-                                <p id="nota">
-                                    NOTA
-                                </p>
+                                <td class="tg-0lax" id="nota" rowspan="3"
+                                    style="width: 150px; text-align: start !important;">
+                                    <h6 id="nota">
+                                        NOTA
+                                    </h6>
                                 </td>
                             </tr>
                             <tr>
@@ -46,245 +44,115 @@
                         </thead>
                     </table>
                     <!-- lista ul exem -->
-                    
                     {% if observacao1 %}
-                        <p class="mt-2 mb-0" style="font-size: 11px; text-align: justify;">Observações:</p>
-                        <p class="mb-0 text-justify" style="font-size: 11px; text-align: justify; margin-left: 20px;">
-                            <i class="fa-solid fa-angles-right" style="margin-right: 5px;"></i><i>{{ observacao1 }}</i>
-                        </p>
-                        
+                    <p class="mt-2 mb-0">Observações:</p>
+                    <ul>
+                        <li><p style="margin: 0;">{{ observacao1 }}</p></li>
                         {% if observacao2 %}
-                            <p class="mb-0 text-justify" style="font-size: 11px; text-align: justify; margin-left: 20px;">
-                                <i class="fa-solid fa-angles-right" style="margin-right: 5px;"></i><i>{{ observacao2 }}</i>
-                            </p>
-                            {% if observacao3 %}
-                                <p class="mb-0 text-justify" style="font-size: 11px; text-align: justify; margin-left: 20px;">
-                                    <i class="fa-solid fa-angles-right" style="margin-right: 5px;"></i><i>{{ observacao3 }}</i>
-                                </p>
-                            {% endif %}
-                        {% endif %}
+                        <li><p style="margin: 0;">{{ observacao2 }}</p></li>
+                        {% if observacao3 %}
+                        <li><p style="margin: 0;">{{ observacao3 }}</p></li>
+                    </ul>
+                    {% endif %}
+                    {% endif %}
                     {% endif %}
                     <hr class="mt-2 mb-3">
                     {% for questao in questoes %}
-                        <p class="mb-2 text-justify" style="font-size: 11px; text-align: justify;"><strong>{{ forloop.counter }}. </strong>{{ questao.enunciado }}</p>
-                        {% if questao.imagem %}
-                            <img src="{{ questao.imagem.url }}" class="img-fluid mb-2" style="font-size: 11px; text-align: justify; max-height: 200px !important; max-width: 400px !important;" alt="Imagem responsiva">
-                        {% endif %}
-                        {% if questao.comando %}
-                            <p class="mb-2 text-justify" style="font-size: 11px; text-align: justify;">{{ questao.comando }}</p>
-                        {% endif %}
-                        <div class="alternativas">
-                            <div class="row mb-3">
-                                {% if questao.imagem_a %}
-                                    <div class="col">
-                                        <p class="mb-0 mt-2 text-justify">
-                                            a) <img id="imagem-questao" src="{{ questao.imagem_a.url }}" style="max-height: 150px;" class="img-fluid" alt="Imagem responsiva">
-                                        </p>
-                                        <p class="mb-0 mt-2 text-justify">
-                                            b) <img id="imagem-questao" src="{{ questao.imagem_b.url }}" style="max-height: 150px;" class="img-fluid" alt="Imagem responsiva">
-                                        </p>
-                                    </div>
-                                    <div class="col">
-                                        <p class="mb-0 mt-2 text-justify">
-                                            c) <img id="imagem-questao" src="{{ questao.imagem_c.url }}" style="max-height: 150px;" class="img-fluid" alt="Imagem responsiva">
-                                        </p>
-                                        <p class="mb-0 mt-2 text-justify">
-                                            d) <img id="imagem-questao" src="{{ questao.imagem_d.url }}" style="max-height: 150px;" class="img-fluid" alt="Imagem responsiva">
-                                        </p>
-                                    </div>
-                                    <div class="col">
-                                        <p class="mb-0 mt-2 text-justify">
-                                            e) <img id="imagem-questao" src="{{ questao.imagem_e.url }}" style="max-height: 150px;" class="img-fluid" alt="Imagem responsiva">
-                                        </p>
-                                    </div>
-                                {% else %}
-                                    {% if questao.alternativa_a %}
-                                        <p class="mb-0 text-justify" style="font-size: 11px; text-align: justify;">a) {{ questao.alternativa_a }}</p>
-                                        <p class="mb-0 text-justify" style="font-size: 11px; text-align: justify;">b) {{ questao.alternativa_b }}</p>
-                                        <p class="mb-0 text-justify" style="font-size: 11px; text-align: justify;">c) {{ questao.alternativa_c }}</p>
-                                        <p class="mb-0 text-justify" style="font-size: 11px; text-align: justify;">d) {{ questao.alternativa_d }}</p>
-                                        <p class="mb-0 text-justify" style="font-size: 11px; text-align: justify;">e) {{ questao.alternativa_e }}</p>
-                                    {% endif %}
-                                {% endif %}
+                    <p class="mb-2 text-justify" style="font-size: 11px; text-align: justify;"><strong>{{ forloop.counter }}. </strong>{{ questao.enunciado }}</p>
+                    {% if questao.imagem %}
+                    <img src="{{ questao.imagem.url }}" id="imagem-enunciado-{{ forloop.counter }}"
+                        style="height: 150px; max-width: 100%;" class="imagem-enunciado mb-2" alt="Imagem responsiva" onclick="attImageEnunciado('{{ forloop.counter }}')">
+                    {% endif %}
+                    {% if questao.comando %}
+                    <p class="mb-2 text-justify" style="font-size: 11px; text-align: justify;">{{ questao.comando }}</p>
+                    {% endif %}
+                    <div class="alternativas">
+                        <div class="row mb-3">
+                            {% if questao.imagem_a %}
+                            <div class="col">
+                                <p class="mb-0 mt-2 text-justify">
+                                    a) <img id="imagem-alternativa-{{ forloop.counter }}" style="height: 150px;"
+                                        src="{{ questao.imagem_a.url }}" alt="Imagem responsiva" class="imagem-resposta" onclick="attImageResposta('{{ forloop.counter }}')">
+                                </p>
+                                <p class="mb-0 mt-2 text-justify">
+                                    b) <img id="imagem-alternativa-{{ forloop.counter }}" style="height: 150px;"
+                                        src="{{ questao.imagem_b.url }}" alt="Imagem responsiva" class="imagem-resposta" onclick="attImageResposta('{{ forloop.counter }}')">
+                                </p>
                             </div>
+                            <div class="col">
+                                <p class="mb-0 mt-2 text-justify">
+                                    c) <img id="imagem-alternativa-{{ forloop.counter }}" style="height: 150px;"
+                                        src="{{ questao.imagem_c.url }}" alt="Imagem responsiva" class="imagem-resposta" onclick="attImageResposta('{{ forloop.counter }}')">
+                                </p>
+                                <p class="mb-0 mt-2 text-justify">
+                                    d) <img id="imagem-alternativa-{{ forloop.counter }}" style="height: 150px;"
+                                        src="{{ questao.imagem_d.url }}" alt="Imagem responsiva" class="imagem-resposta" onclick="attImageResposta('{{ forloop.counter }}')">
+                                </p>
+                            </div>
+                            <div class="col">
+                                <p class="mb-0 mt-2 text-justify">
+                                    e) <img id="imagem-alternativa-{{ forloop.counter }}" style="height: 150px;"
+                                        src="{{ questao.imagem_e.url }}" alt="Imagem responsiva" class="imagem-resposta">
+                                </p>
+                            </div>
+                            {% else %}
+                            {% if questao.alternativa_a %}
+                            <p class="mb-0 text-justify" style="font-size: 11px; text-align: justify;">a) {{ questao.alternativa_a }}</p>
+                            <p class="mb-0 text-justify" style="font-size: 11px; text-align: justify;">b) {{ questao.alternativa_b }}</p>
+                            <p class="mb-0 text-justify" style="font-size: 11px; text-align: justify;">c) {{ questao.alternativa_c }}</p>
+                            <p class="mb-0 text-justify" style="font-size: 11px; text-align: justify;">d) {{ questao.alternativa_d }}</p>
+                            <p class="mb-0 text-justify" style="font-size: 11px; text-align: justify;">e) {{ questao.alternativa_e }}</p>
+                            {% endif %}
+                            {% endif %}
                         </div>
+                    </div>
                     {% endfor %}
                     <p style="text-align: right;" class="mt-5"><strong>Boa Avaliação!</strong></p>
 
                     <div class="break">
-                        <hr>
                         <div class="table-responsive mt-3">
                             <table class="table">
-                            <thead class="text-center">
-                                <tr>
-                                    <th scope="col">ID</th>
-                                    <th scope="col">Questão</th>
-                                    <th scope="col">Gabarito</th>
-                                    <th scope="col">Conteúdo</th>
-                                    <th scope="col">Dificuldade</th>
-                                    <th scope="col">Tipo de questão</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for questao in questoes %}
-                                <tr>
-                                    <td style="text-align: center; vertical-align: middle;">{{ questao.id }}</td>
-                                    <td style="text-align: center; vertical-align: middle;">{{ forloop.counter }}</td>
-                                    {% if questao.gabarito %}
-                                    <td>{{ questao.gabarito }}</td>
-                                    {% else %}
-                                    <td>Discursiva</td>
-                                    {% endif %}
-                                    <td>{{ questao.conteudo }}</td>
-                                    <td style="text-align: center; vertical-align: middle;">{{ questao.dificuldade }}</td>
-                                    {% if questao.vinculo %}
-                                    <td style="text-align: center; vertical-align: middle;">Particular</td>
-                                    {% else %}
-                                    <td style="text-align: center; vertical-align: middle;">Pública</td>
-                                    {% endif %}
-                                </tr>
-                                {% endfor %}
-                            </tbody>
+                                <thead class="text-center">
+                                    <tr>
+                                        <th scope="col">ID</th>
+                                        <th scope="col">Questão</th>
+                                        <th scope="col">Gabarito</th>
+                                        <th scope="col">Conteúdo</th>
+                                        <th scope="col">Dificuldade</th>
+                                        <th scope="col">Tipo de questão</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for questao in questoes %}
+                                    <tr>
+                                        <td style="text-align: center; vertical-align: middle;">{{ questao.id }}</td>
+                                        <td style="text-align: center; vertical-align: middle;">{{ forloop.counter }}
+                                        </td>
+                                        {% if questao.gabarito %}
+                                        <td>{{ questao.gabarito }}</td>
+                                        {% else %}
+                                        <td>Discursiva</td>
+                                        {% endif %}
+                                        <td>{{ questao.conteudo }}</td>
+                                        <td style="text-align: center; vertical-align: middle;">{{ questao.dificuldade }}</td>
+                                        {% if questao.vinculo %}
+                                        <td style="text-align: center; vertical-align: middle;">Particular</td>
+                                        {% else %}
+                                        <td style="text-align: center; vertical-align: middle;">Pública</td>
+                                        {% endif %}
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
                             </table>
                         </div>
-                    </div>            
-                {% else %}
+                    </div>
+                    {% else %}
                     <h6 class="text-center mb-0">NÃO HÁ QUESTÕES COM ESSES FILTROS</h6>
                     <p class="text-center mb-0">Confira os filtros e tente novamente</p>
-                {% endif %}
-              </div>
-              <div class="col-1">
-              </div>
+                    {% endif %}
+                </div>
             </div>
-          </div>
+        </div>
     </div>
-    <style type="text/css">
-        @import url('https://fonts.googleapis.com/css2?family= Artifika & display = swap');
-        .tg  {
-            border-collapse:separate;
-            border-spacing:1;
-        }
-        table, td {
-            border: 1px solid black;
-            border-radius: 5px;
-            -moz-border-radius: 5px;
-            padding: 5px;
-        }
-        .tg td{
-            border-color:black;
-            border-style:double;
-            border-width:1px;
-            font-family:Arial, sans-serif;
-            font-size:14px;
-            overflow:hidden;
-            padding:6px 3px 1px 3px;
-            word-break:normal;
-        }
-        .tg th{
-            border-color:black;
-            border-style:solid;
-            border-width:1px;
-            font-family:Arial, sans-serif;
-            font-size:14px;
-            font-weight:normal;
-            overflow:hidden;
-            padding:10px 5px;
-            word-break:normal;
-        }
-        .tg .tg-baqh{
-            text-align:center;
-            vertical-align:top
-        }
-        .tg .tg-0lax{
-            text-align:left;
-            vertical-align:center
-        }
-        img {
-            max-height: 250px !important;
-        }
-        #imagem-questao {
-            max-height: 150px !important;
-        }
-        .break {
-            page-break-before: always;
-        }
-        p {
-            font-family: 'Artifika', serif !important;
-            font-size: 12px !important;
-        }
-        td {
-            font-family: 'Artifika', serif !important;
-            font-weight: bold;
-            font-size: 11px !important;
-        }
-        #nota {
-            text-align: center;
-            margin-top: -40px;
-        }
-        .container {
-            width: 85%;
-        }
-        body {
-            background-color: #F8F9FA;
-        }
-        .col-10 {
-            background-color: white;
-            border-radius: 10px;
-            margin-top: 3%;
-            padding: 5%;
-        }
-        .table {
-            border-collapse: collapse;
-        }
-        .table td, .table th {
-            border: 0.5px solid #ddd;
-            padding: 8px;
-        }
-        .table tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-        .table tr:hover {
-            background-color: #e9ecef;
-        }
-        .table-responsive {
-            overflow-x: auto;
-        }
-        @media print {
-            .navbar {
-                display: none;
-            }
-            .col-1 {
-                width: 1%;
-            }
-            .col-10 {
-                width: 98%;
-                padding: 0 !important;
-                margin-top: 0 !important;
-            }
-            .central {
-                margin-top: 0 !important;
-                padding-top: 0 !important;
-                width: 100% !important;
-            }
-            .container {
-                margin-top: 0 !important;
-                padding-top: 0 !important;
-                width: 100% !important;
-            }
-            body {
-                background-color: white;
-            }
-            #nota {
-                width: 100px !important;
-            }
-            #curso {
-                width: 380px !important;
-            }
-            #turma {
-                width: 150px !important;
-            }
-        }
-    </style>
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
 </body>
 {% endblock content %}

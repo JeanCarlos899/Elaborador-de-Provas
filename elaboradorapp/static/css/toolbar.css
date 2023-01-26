@@ -1,0 +1,163 @@
+
+.toolbar {
+    display: flex;
+    align-items: center;
+}
+
+#navbarHeader {
+    border-radius: 0 0 10px 10px;
+    border: 0.5px solid #e0e0e0;
+}
+
+.linha-vertical {
+    height: 60%;
+    border-left: 1px solid #e0e0e0;
+    margin-left: 1%;
+    margin-right: 1%;
+}
+
+.image-enunciado-label, .image-question-label {
+    margin-right: 2px !important;
+}
+
+.atualizando{
+    background-color: #e8f0fe;
+    color: #1967d2;
+}
+
+/* ========================= cores - controls ============================= */
+
+input[type="color"] {
+    border: 1px solid #e0e0e0;
+    width: 40px;
+    height: 24px;
+    cursor: pointer;
+}
+
+.color-picker {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+}
+
+/* ========================= Configurações gerais - controls ============================= */
+
+.font-size-control, .image-enunciado-control, .image-question-control {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    background-color: none;
+}
+
+.font-size-control button, .image-enunciado-control button, .image-question-control button {
+    width: 24px;
+    height: 24px;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    background-color: white;
+    border: 1px solid #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.font-size-control .decrease-font-size, .image-enunciado-control .decrease-image-enunciado-size, .image-question-control .decrease-image-question-size {
+    margin-right: 0px;
+}
+
+.font-size-control .increase-font-size, .image-enunciado-control .increase-image-enunciado-size, .image-question-control .increase-image-question-size {
+    margin-left: 0;
+    padding: 0;
+}
+
+.font-size-control .font-size-number, .image-enunciado-control .image-enunciado-number, .image-question-control .image-resposta-number {
+    width: 40px;
+    height: 24px;
+    margin: 0;
+    font-size: 16px;
+    text-align: center;
+    border: 1px solid #e0e0e0;
+    font-size: 14px;
+}
+
+.font-size-control .font-size-number:focus, .image-enunciado-control .image-enunciado-size-number:focus, .image-question-control .image-question-size-number:focus {
+    box-shadow: 0 0 0 0;
+    outline: 0;
+}
+
+.font-size-number::-webkit-inner-spin-button, .image-enunciado-size-number::-webkit-inner-spin-button, .image-question-size-number::-webkit-inner-spin-button { 
+    -webkit-appearance: none;
+    
+}
+
+/* ========================= Imagem enunciado ============================= */
+
+
+.image-enunciado-control label {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    margin-right: 20px;
+}
+
+/* ========================= Imagem question ============================= */
+
+
+.image-question-control label {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    margin-right: 20px;
+}
+
+/* ========================= Imagem question ============================= */
+
+.fa-solid:active {
+    color: #1a73e8;
+}
+
+
+.fa-solid {
+    font-size: 15px !important;
+    cursor: pointer;
+}
+
+.fa-solid:active {
+    color: #1a73e8;
+}
+
+.font-size-label {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    margin-right: 5px;
+}
+
+.print, .color, .reload, .configs, .italic, .bold, .underline, .clear, .font-case, .undo, .redo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    margin-right: 3px;
+}
+
+.reload {
+    width: 100px;
+    text-align: center;
+    margin-left: auto;
+    outline: 0;
+    border: 0;
+    border-radius: 5px;
+    background-color: #e8f0fe;
+    color: #1967d2;
+}
+
+/* hover and active */
+
+.print:hover, .configs:hover, .bold:hover, .italic:hover, .underline:hover, .clear:hover, .font-case:hover, .color:hover, .undo:hover, .redo:hover {
+    background-color: #e0e0e0;
+    border-radius: 5px;
+}
+
+.font-size-control button:hover, .image-enunciado-control button:hover, .image-question-control button:hover {
+    background-color: #e0e0e0;
+}

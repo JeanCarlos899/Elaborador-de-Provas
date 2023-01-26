@@ -1,0 +1,297 @@
+@import url('https://fonts.googleapis.com/css2?family= Artifika & display = swap');
+        
+
+/* configurações iniciais */
+
+body {
+    background-color: #f1f1f1;
+}
+
+.container {
+    width: 100%;
+}
+
+/* toolbar */
+
+.toolbar {
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+    border-radius: 0 0 10px 10px;
+    height: 42px;
+    position: fixed;
+    top: 55px;
+}
+
+.font-size-control {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    background-color: none;
+    margin-left: 2%;
+}
+
+.font-size-control button {
+    width: 24px;
+    height: 24px;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    background-color: white;
+    border: 1px solid #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.font-size-control .decrease-font-size {
+    margin-right: 0px;
+}
+
+.font-size-control .increase-font-size {
+    margin-left: 0;
+    padding: 0;
+}
+
+.font-size-control .font-size-number {
+    width: 40px;
+    height: 24px;
+    margin: 0;
+    font-size: 16px;
+    text-align: center;
+    border: 1px solid #e0e0e0;
+}
+
+.font-size-control .font-size-number:focus {
+    box-shadow: 0 0 0 0;
+    outline: 0;
+}
+
+.font-size-number::-webkit-inner-spin-button { 
+    -webkit-appearance: none;
+    
+}
+
+i {
+    font-size: 15px;
+    cursor: pointer;
+}
+
+i:active {
+    color: #1a73e8;
+}
+
+span {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    margin-right: 20px;
+}
+
+.print {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 2%;
+    width: 24px;
+    height: 24px;
+}
+
+.print i {
+    font-size: 18px;
+}
+
+.reload {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10px;
+    width: 24px;
+    height: 24px;
+}
+
+.reload i {
+    font-size: 18px;
+}
+
+/* hover and active */
+
+.print:hover {
+    background-color: #e0e0e0;
+    border-radius: 5px;
+}
+
+.reload:hover {
+    background-color: #e0e0e0;
+    border-radius: 5px;
+}
+
+.font-size-control button:hover {
+    background-color: #e0e0e0;
+}
+
+/* estilo de listagem das provas */
+
+.prova {
+    background-color: white;
+    border-radius: 10px;
+    padding: 5%;
+    width: 70% !important;
+}
+
+.col-2 {
+    width: 20% !important;
+    height: 80vh;
+    background-color: white;
+    border-radius: 10px;
+    padding: 2%;
+    margin-left: 5%;
+    position: fixed;
+    right: 10%;
+    overflow-y: scroll;
+    scrollbar-width: none;
+}  
+.col-2::-webkit-scrollbar {
+    display: none;
+}
+
+/* definindo a letra padrão da listagem de provas */
+
+p {
+    font-family: 'Artifika', serif !important;
+    font-size: 12px !important;
+}
+
+td {
+    font-family: 'Artifika', serif !important;
+    font-weight: bold;
+    font-size: 11px !important;
+}
+
+.col-2 label {
+    font-family: 'Artifika', serif !important;
+    font-size: 11px !important;
+}
+
+.col-2 input {
+    font-family: 'Artifika', serif !important;
+    font-size: 11px !important;
+}
+
+/* estilo do cabeçalho */
+
+.tg  {
+    border-collapse:separate;
+    border-spacing:1;
+}
+
+table, td {
+    border: 1px solid black;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    padding: 5px;
+}
+
+.tg td{
+    border-color:black;
+    border-style:double;
+    border-width:1px;
+    font-family:Arial, sans-serif;
+    font-size:14px;
+    overflow:hidden;
+    padding:6px 3px 1px 3px;
+    word-break:normal;
+}
+
+.tg th{
+    border-color:black;
+    border-style:solid;
+    border-width:1px;
+    font-family:Arial, sans-serif;
+    font-size:14px;
+    font-weight:normal;
+    overflow:hidden;
+    padding:10px 5px;
+    word-break:normal;
+}
+
+.tg .tg-baqh{
+    text-align:center;
+    vertical-align:top
+}
+
+.tg .tg-0lax{
+    text-align:left;
+    vertical-align:center
+}
+
+#nota {
+    text-align: center;
+    margin-top: -40px;
+}
+
+/* estilo da tabela do gabarito da prova */
+.table {
+    border-collapse: collapse;
+}
+
+.table td, .table th {
+    border: 0.5px solid #ddd;
+    padding: 8px;
+}
+
+.table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.table tr:hover {
+    background-color: #e9ecef;
+}
+
+.table-responsive {
+    overflow-x: auto;
+}
+
+.break {
+    page-break-before: always;
+}
+
+/* configurações do da impressão de prova */
+
+@media print {
+    .navbar {
+        display: none !important;
+    }
+    .toolbar {
+        display: none !important;
+    }
+    .col-2 {
+        display: none !important;
+    }
+    .prova {
+        width: 100% !important;
+        padding: 0 !important;
+        margin-top: 0 !important;
+    }
+    .central {
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+        width: 100% !important;
+    }
+    .container {
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+        width: 100% !important;
+    }
+    body {
+        background-color: white;
+    }
+    #nota {
+        width: 100px !important;
+    }
+    #curso {
+        width: 380px !important;
+    }
+    #turma {
+        width: 150px !important;
+    }
+}
