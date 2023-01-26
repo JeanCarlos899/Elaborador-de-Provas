@@ -5,6 +5,7 @@ const divProva = document.querySelector('.prova')
 
 function saveMemento() {
     moments.push(divProva.innerHTML)
+    console.log(moments)
 }
 
 function undo() {
