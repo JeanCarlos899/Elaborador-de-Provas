@@ -66,10 +66,10 @@ class QuestionsView(ListView):
 
         # Dados da prova que serão usados para filtrar as questões
         disciplina_escolhida = self.request.GET.get('disciplina')
-        quantidade_questoes = self.request.GET.get('quantidade_questoes')
+        quantidade_questoes = self.request.GET.get('qtd_questoes')
         conteudo_escolhido = self.request.GET.get('conteudo')
-        segundo_conteudo = self.request.GET.get('segundo_conteudo')
-        terceiro_conteudo = self.request.GET.get('terceiro_conteudo')
+        segundo_conteudo = self.request.GET.get('conteudo_2')
+        terceiro_conteudo = self.request.GET.get('conteudo_3')
         serie_escolhida = self.request.GET.get('serie')
         dificuldade_escolhida = self.request.GET.get('dificuldade')
         nome_logo = self.request.GET.get('nome_logo')

@@ -22,8 +22,8 @@
                     <p class="mt-0 mb-0"><strong>Prova</strong></p>
                   </div>
                   <div class="col-10">
-                    <label for="exampleFormControlSelect1">Disciplina</label>
-                    <select class="form-control" id="disciplina" name="disciplina" value="{{ request.get.disciplina }}">
+                    <label for="disciplina">Disciplina</label>
+                    <select class="form-control" id="disciplina" name="disciplina" >
                       {% for disciplina in disciplinas %}
                         <option>{{ disciplina.nome }}</option>
                       {% endfor %}
@@ -32,7 +32,7 @@
                   <div class="col">
                     <!-- quantidade de questões da prova -->
                     <label for="exampleFormControlSelect1">Quantidade de questões</label>
-                    <select class="form-control" id="exampleFormControlSelect1" name="quantidade_questoes" value="{{ request.get.quantidade_questoes }}">
+                    <select class="form-control" id="exampleFormControlSelect1" name="qtd_questoes">
                       <option>1</option>
                       <option>2</option>
                       <option>3</option>
@@ -49,7 +49,7 @@
                 <div class="row">
                   <div class="col-7">
                     <label for="conteudo">Conteúdo</label>
-                    <input type="search" list="conteudos" class="form-control" name="conteudo" value="{{ request.get.conteudo }}" id="conteudo" placeholder="Pesquise aqui o conteúdo" required>
+                    <input type="search" list="conteudos" class="form-control" name="conteudo" id="conteudo" placeholder="Pesquise aqui o conteúdo" required>
                     <datalist id="conteudos">
                     {% for conteudo in conteudos %}
                       <option>{{ conteudo.nome }}</option>
@@ -79,7 +79,7 @@
                 <div class="row">
                   <div class="col">
                     <div class="collapse" id="segundo_conteudo">
-                      <input type="search" list="conteudos" class="form-control mt-3" name="segundo_conteudo" value="{{ request.get.segundo_conteudo }}" id="exampleFormControlSelect1" placeholder="Pesquise o segundo conteúdo">
+                      <input type="search" list="conteudos" class="form-control mt-3" name="conteudo_2" id="exampleFormControlSelect1" placeholder="Pesquise o segundo conteúdo">
                       <datalist id="conteudos">
                       {% for conteudo in conteudos %}
                         <option>{{ conteudo.nome }}</option>
@@ -91,7 +91,7 @@
                 <div class="row">
                   <div class="col">
                     <div class="collapse" id="terceiro_conteudo">
-                      <input type="search" list="conteudos" class="form-control mt-3" name="terceiro_conteudo" value="{{ request.get.terceiro_conteudo }}" id="exampleFormControlSelect1" placeholder="Pesquise o terceiro conteúdo">
+                      <input type="search" list="conteudos" class="form-control mt-3" name="conteudo_3" id="exampleFormControlSelect1" placeholder="Pesquise o terceiro conteúdo">
                       <datalist id="conteudos">
                       {% for conteudo in conteudos %}
                         <option>{{ conteudo.nome }}</option>
@@ -105,7 +105,7 @@
                     <div class="row">
                       <div class="col">
                         <label for="exampleFormControlSelect1">Série</label>
-                        <select class="form-control" id="exampleFormControlSelect1" name="serie" value="{{ request.get.serie }}">
+                        <select class="form-control" id="exampleFormControlSelect1" name="serie">
                           <option value="Indefinido">Indefinido</option>
                           <option value="1">1</option>
                           <option value="2">2</option>
@@ -114,7 +114,7 @@
                       </div>
                       <div class="col">
                         <label for="exampleFormControlSelect1">Dificuldade</label>
-                        <select class="form-control" id="exampleFormControlSelect1" name="dificuldade" value="{{ request.get.dificuldade }}">
+                        <select class="form-control" id="exampleFormControlSelect1" name="dificuldade">
                           <option value="Indefinido">Indefinido</option>
                           <option value="F">Fácil</option>
                           <option value="M">Média</option>
@@ -144,14 +144,14 @@
                   </div>
                   <div class="col">
                     <label for="tipo_prova">Tipo prova</label>
-                    <select class="form-control" id="tipo_prova" name="tipo_prova" value="{{ request.get.tipo_prova }}">
+                    <select class="form-control" id="tipo_prova" name="tipo_prova">
                       <option value="mensal">Mensal</option>
                       <option value="bimestral">Bimestral</option>
                     </select>
                   </div>
                   <div class="col">
                     <label for="bimestre">Bimestre</label>
-                    <select class="form-control" id="bimestre" name="bimestre" value="{{ request.get.bimestre }}">
+                    <select class="form-control" id="bimestre" name="bimestre">
                       <option>1º Bimestre</option>
                       <option>2º Bimestre</option>
                       <option>3º Bimestre</option>
@@ -170,7 +170,7 @@
                     </div>
                   <div class="col-4">
                     <label for="exampleFormControlSelect1">Logo</label>
-                    <select type="search" class="form-control" name="nome_logo" value="{{ request.get.nome_logo }}" id="exampleFormControlSelect1" placeholder="Pesquise o nome do logo">
+                    <select type="search" class="form-control" name="nome_logo" id="exampleFormControlSelect1" placeholder="Pesquise o nome do logo">
                     {% for logo in logos %}
                       <option>{{ logo.nome }}</option>
                     {% endfor %}
@@ -178,7 +178,7 @@
                   </div>
                   <div class="col-5">
                     <label for="exampleFormControlSelect1">Curso</label>
-                    <input type="text" class="form-control" name="curso" value="{{ request.get.curso }}" id="exampleFormControlSelect1" placeholder="Informe o nome do curso para o cabeçalho">
+                    <input type="text" class="form-control" name="curso" id="exampleFormControlSelect1" placeholder="Informe o nome do curso para o cabeçalho">
                   </div>
                 </div>
                 <div class="row">
@@ -212,19 +212,19 @@
                           <p class="mt-2 mb-1"><strong>Instruções / observações</strong></p>
                         </div>
                         <label for="exampleFormControlSelect1">Observação um</label>
-                        <input type="text" class="form-control" name="observacao_1" value="{{ request.get.observacao_1 }}" id="exampleFormControlTextarea1" placeholder="Informe a observação"></input>
+                        <input type="text" class="form-control" name="observacao_1" id="exampleFormControlTextarea1" placeholder="Informe a observação"></input>
                       </div>
                     </div>
                     <div class="row">
                       <div class="col">
                         <label for="exampleFormControlSelect1">Observação dois</label>
-                        <input type="text" class="form-control" name="observacao_2" value="{{ request.get.observacao_2 }}" id="exampleFormControlTextarea1" placeholder="Informe a observação"></input>
+                        <input type="text" class="form-control" name="observacao_2" id="exampleFormControlTextarea1" placeholder="Informe a observação"></input>
                       </div>
                     </div>
                     <div class="row">
                       <div class="col">
                         <label for="exampleFormControlSelect1">Observação três</label>
-                        <input type="text" class="form-control" name="observacao_3" value="{{ request.get.observacao_3}}" id="exampleFormControlTextarea1" placeholder="Informe a observacão"></input>
+                        <input type="text" class="form-control" name="observacao_3" id="exampleFormControlTextarea1" placeholder="Informe a observacão"></input>
                       </div>
                     </div>
                   </div>
@@ -250,7 +250,7 @@
   const tipo_prova = document.getElementById('tipo_prova');
 
   document.getElementById('topo').value = 'Avaliação ' + tipo_prova.value + ' de ' + disciplina.value + ' - ' + bimestre.value;
-  
+
   disciplina.addEventListener('change', function() {
     document.getElementById('topo').value = 'Avaliação ' + tipo_prova.value + ' de ' + disciplina.value + ' - ' + bimestre.value;
   });

@@ -75,6 +75,18 @@ increaseImageResposta.addEventListener('click', function () {
     });
 });
 
+
+
+function removeImageEnunciado() {
+    saveMoment();
+    let currentQuestion = imageEnunciadoNumber.value;
+    let imagens = document.querySelectorAll(`#imagem-enunciado-${currentQuestion}`);
+    imagens.forEach(function (imagem) {
+        // remover o elemento
+        imagem.remove();
+    });
+};
+
 var ultimoClick = '';
 
 function attImageEnunciado(id) {
@@ -109,5 +121,10 @@ document.addEventListener('keydown', function (event) {
         } else if (ultimoClick === "imagem-resposta") {
             increaseImageResposta.click();
         }
+    }
+    if (event.key === 'Delete') {
+        if (ultimoClick === "imagem-enunciado") {
+            removeImageEnunciado();
+        } 
     }
 });
