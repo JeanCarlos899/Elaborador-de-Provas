@@ -9,9 +9,10 @@
 <head>
     <link rel="stylesheet" href="{% static 'css/questions.css' %}">
     <link rel="stylesheet" href="{% static 'css/toolbar.css' %}">
+    {% csrf_token %}
 </head>
 <body>
-    <div class="central mt-5">
+    <div class="avaliacao mt-5">
         <div class="container mt-5">
             <div class="row">
                 <div class="col-10 mt-5 mx-auto prova">
@@ -21,7 +22,7 @@
                             <tr>
                                 <td class="tg-0lax" rowspan="4" style="width: 80px;"><img id="logo" src="{{ logo }}"
                                         alt="" width="80px"></td>
-                                <td class="tg-0lax text-center" colspan="3">Avaliação {{ tipo_prova }} de {{ nome_disciplina }} - {{ bimestre }} </td>
+                                <td class="tg-0lax text-center" colspan="3">{{ topo }}</td>
                             </tr>
                             <tr>
                                 <td class="tg-0lax" id="curso" style="width: 350px;">Curso: {{ curso }}</td>
@@ -43,19 +44,20 @@
                             </tr>
                         </thead>
                     </table>
-                    <!-- lista ul exem -->
                     {% if observacao1 %}
                     <p class="mt-2 mb-0">Observações:</p>
+                    {% endif %}
                     <ul>
+                        {% if observacao1 %}
                         <li><p style="margin: 0;">{{ observacao1 }}</p></li>
+                        {% endif %}
                         {% if observacao2 %}
                         <li><p style="margin: 0;">{{ observacao2 }}</p></li>
+                        {% endif %}
                         {% if observacao3 %}
                         <li><p style="margin: 0;">{{ observacao3 }}</p></li>
+                        {% endif %}
                     </ul>
-                    {% endif %}
-                    {% endif %}
-                    {% endif %}
                     <hr class="mt-2 mb-3">
                     {% for questao in questoes %}
                     <p class="mb-2 text-justify" style="font-size: 11px; text-align: justify;"><strong>{{ forloop.counter }}. </strong>{{ questao.enunciado }}</p>

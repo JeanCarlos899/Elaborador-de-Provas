@@ -62,6 +62,7 @@ class QuestionsView(ListView):
         context['curso'] = self.request.GET.get('curso')
         context['turma'] = self.request.GET.get('turma')
         context['bimestre'] = self.request.GET.get('bimestre')
+        context['topo'] = self.request.GET.get('topo')
 
         # Dados da prova que serão usados para filtrar as questões
         disciplina_escolhida = self.request.GET.get('disciplina')

@@ -42,11 +42,28 @@ input[type="color"] {
 
 /* ========================= Configurações gerais - controls ============================= */
 
-.font-size-control, .image-enunciado-control, .image-question-control {
+.font-size-control, .image-enunciado-control, .image-question-control, .name-input {
     display: flex;
     align-items: center;
     padding: 8px;
     background-color: none;
+}
+
+.name-input {
+    width: 100%;
+    height: 24px;
+    background-color: white;
+    border: 1px solid #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    outline: 0;
+    font-size: 12px;
+}
+
+.name {
+    margin-right: 1%;
 }
 
 .font-size-control button, .image-enunciado-control button, .image-question-control button {
@@ -131,7 +148,7 @@ input[type="color"] {
     margin-right: 5px;
 }
 
-.print, .color, .reload, .configs, .italic, .bold, .underline, .clear, .font-case, .undo, .redo {
+.print, .color, .reload, .save button, .configs, .italic, .bold, .underline, .clear, .font-case, .undo, .redo {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -150,6 +167,24 @@ input[type="color"] {
     background-color: #e8f0fe;
     color: #1967d2;
 }
+
+.save button {
+    width: 80px;
+    text-align: center;
+    margin-left: auto;
+    outline: 0;
+    border: 0;
+    border-radius: 5px;
+    background-color: #e8f0fe;
+}
+
+.save button:active {
+    transform: scale(0.95) !important;
+    box-shadow: 0 0 5px #666;
+    color: #1967d2;
+}
+
+
 
 /* hover and active */
 

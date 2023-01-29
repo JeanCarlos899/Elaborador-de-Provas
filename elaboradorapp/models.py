@@ -27,7 +27,6 @@ class Logo(models.Model):
     def __str__(self):
         return self.nome
 
-
 class Question(models.Model): 
 
     vinculo = models.ForeignKey(
@@ -199,3 +198,11 @@ class Question(models.Model):
         verbose_name = u'questão'
         verbose_name_plural = u'questões'
         ordering = ['disciplina', 'conteudo']
+
+class Prova(models.Model):
+    html_prova = models.TextField()
+    nome_prova = models.CharField(max_length=100, null=True, blank=True)
+    criador = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+
+    def __str__(self):
+        return self.nome_prova

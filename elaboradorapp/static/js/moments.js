@@ -3,9 +3,8 @@ const moments = []
 const redoStack = []
 const divProva = document.querySelector('.prova')
 
-function saveMemento() {
+function saveMoment() {
     moments.push(divProva.innerHTML)
-    console.log(moments)
 }
 
 function undo() {

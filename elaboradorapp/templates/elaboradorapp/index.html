@@ -4,7 +4,7 @@
 
 {% block content %}
 <div class="container pt-3">
-  <form class="form-group" action="{% url 'elaboradorapp:listar_questoes' %}" method="GET">
+  <form class="form-group" action="{% url 'elaboradorapp:listar-questoes' %}" method="GET">
     <div class="row justify-content-center pt-5">
       <div class="col-mb-6">
         <div class="card">
@@ -23,7 +23,7 @@
                   </div>
                   <div class="col-10">
                     <label for="exampleFormControlSelect1">Disciplina</label>
-                    <select class="form-control" id="exampleFormControlSelect1" name="disciplina" value="{{ request.get.disciplina }}">
+                    <select class="form-control" id="disciplina" name="disciplina" value="{{ request.get.disciplina }}">
                       {% for disciplina in disciplinas %}
                         <option>{{ disciplina.nome }}</option>
                       {% endfor %}
@@ -48,8 +48,8 @@
                 </div>
                 <div class="row">
                   <div class="col-7">
-                    <label for="exampleFormControlSelect1">Conteúdo</label>
-                    <input type="search" list="conteudos" class="form-control" name="conteudo" value="{{ request.get.conteudo }}" id="exampleFormControlSelect1" placeholder="Pesquise aqui o conteúdo" required>
+                    <label for="conteudo">Conteúdo</label>
+                    <input type="search" list="conteudos" class="form-control" name="conteudo" value="{{ request.get.conteudo }}" id="conteudo" placeholder="Pesquise aqui o conteúdo" required>
                     <datalist id="conteudos">
                     {% for conteudo in conteudos %}
                       <option>{{ conteudo.nome }}</option>
@@ -128,21 +128,39 @@
                   <div class="head">
                     <p class="mt-2 mb-1"><strong>Cabeçalho</strong></p>
                   </div>
-                  <div class="col-6">
+                  <div class="col-9">
                     <label for="exampleFormControlSelect1">Nome do professor</label>
                     <input type="text" class="form-control" name="nome_professor" value="{{ nome_professor }}" id="exampleFormControlSelect1" placeholder="Informe o nome do professor para o cabeçalho">
                   </div>
-                  <div class="col-4">
-                    <label for="exampleFormControlSelect1">Curso</label>
-                    <input type="text" class="form-control" name="curso" value="{{ request.get.curso }}" id="exampleFormControlSelect1" placeholder="Informe o nome do curso para o cabeçalho">
-                  </div>
-                  <div class="col">
+                  <div class="col-3">
                     <label for="exampleFormControlSelect1">Data</label>
                     <input type="date" class="form-control" name="data" id="exampleFormControlSelect1" placeholder="Informe a data para o cabeçalho">                  
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col-5">
+                  <div class="col-6">
+                    <label for="exampleFormControlSelect1">Topo do cabeçalho</label>
+                    <input type="text" class="form-control" name="topo" id="topo" placeholder="Informe o primeiro texto que aparece no cabeçalho">
+                  </div>
+                  <div class="col">
+                    <label for="tipo_prova">Tipo prova</label>
+                    <select class="form-control" id="tipo_prova" name="tipo_prova" value="{{ request.get.tipo_prova }}">
+                      <option value="mensal">Mensal</option>
+                      <option value="bimestral">Bimestral</option>
+                    </select>
+                  </div>
+                  <div class="col">
+                    <label for="bimestre">Bimestre</label>
+                    <select class="form-control" id="bimestre" name="bimestre" value="{{ request.get.bimestre }}">
+                      <option>1º Bimestre</option>
+                      <option>2º Bimestre</option>
+                      <option>3º Bimestre</option>
+                      <option>4º Bimestre</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-3">
                     <label for="exampleFormControlSelect1">Turma</label>
                     <select type="text" class="form-control" name="turma" id="exampleFormControlSelect1" placeholder="Informe o nome da turma para o cabeçalho">
                       <option>1º Ano</option>
@@ -150,7 +168,7 @@
                       <option>3º Ano</option>
                     </select>
                     </div>
-                  <div class="col">
+                  <div class="col-4">
                     <label for="exampleFormControlSelect1">Logo</label>
                     <select type="search" class="form-control" name="nome_logo" value="{{ request.get.nome_logo }}" id="exampleFormControlSelect1" placeholder="Pesquise o nome do logo">
                     {% for logo in logos %}
@@ -158,19 +176,9 @@
                     {% endfor %}
                     </select>
                   </div>
-                  <div class="col">
-                    <label for="exampleFormControlSelect1">Tipo prova</label>
-                    <select class="form-control" id="exampleFormControlSelect1" name="tipo_prova" value="{{ request.get.tipo_prova }}">
-                      <option value="mensal">Mensal</option>
-                      <option value="bimestral">Bimestral</option>
-                    </select>
-                  </div>
-                  <div class="col">
-                    <label for="exampleFormControlSelect1">Bimestre</label>
-                    <select class="form-control" id="exampleFormControlSelect1" name="bimestre" value="{{ request.get.bimestre }}">
-                      <option>1º Bimestre</option>
-                      <option>2º Bimestre</option>
-                    </select>
+                  <div class="col-5">
+                    <label for="exampleFormControlSelect1">Curso</label>
+                    <input type="text" class="form-control" name="curso" value="{{ request.get.curso }}" id="exampleFormControlSelect1" placeholder="Informe o nome do curso para o cabeçalho">
                   </div>
                 </div>
                 <div class="row">
@@ -236,4 +244,24 @@
     </div>
   </form>
 </div>
+<script>
+  const disciplina = document.getElementById('disciplina');
+  const bimestre = document.getElementById('bimestre');
+  const tipo_prova = document.getElementById('tipo_prova');
+
+  document.getElementById('topo').value = 'Avaliação ' + tipo_prova.value + ' de ' + disciplina.value + ' - ' + bimestre.value;
+  
+  disciplina.addEventListener('change', function() {
+    document.getElementById('topo').value = 'Avaliação ' + tipo_prova.value + ' de ' + disciplina.value + ' - ' + bimestre.value;
+  });
+
+  bimestre.addEventListener('change', function() {
+    document.getElementById('topo').value = 'Avaliação ' + tipo_prova.value + ' de ' + disciplina.value + ' - ' + bimestre.value;
+  });
+
+  tipo_prova.addEventListener('change', function() {
+    document.getElementById('topo').value = 'Avaliação ' + tipo_prova.value + ' de ' + disciplina.value + ' - ' + bimestre.value;
+  });
+  
+</script>
 {% endblock content %}

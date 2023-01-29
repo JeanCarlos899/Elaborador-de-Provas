@@ -5,6 +5,8 @@
 
 <head>
   <title>{% block title %}{% endblock %}</title>
+  <!-- icone -->
+  <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/4891/4891497.png" type="image/x-icon">
   <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
   <link rel="stylesheet" href="{% static 'fontawesome-free-6.1.1-web/css/all.min.css' %}">
   <link rel="stylesheet" href="{% static 'css/base.css' %}">
@@ -21,6 +23,7 @@
           <a class="navbar-brand text-white" href="{% url 'elaboradorapp:index' %}"><strong>ELABORADOR</strong> DE
             PROVAS</a>
             <div class="justify-content-end">
+              <a class="btn btn-outline-success my-2 my-sm-0 text-white" href="{% url 'elaboradorapp:listar-provas' %}">Provas salvas</a>
               <a class="btn btn-outline-success my-2 my-sm-0 text-white" href="/admin" target="_blank">Administração do sistema</a>
             </div>
         </div>
@@ -35,8 +38,8 @@
               <div class="redo" title="Refazer (Ctrl + Y)">
                 <i class="fa-solid fa-redo"></i>
               </div>
-              <div class="print" title="Imprimir">
-                <i class="fa-solid fa-print" onclick="print()"></i>
+              <div class="print" title="Imprimir" onclick="print()">
+                <i class="fa-solid fa-print"></i>
               </div>
               <div class="linha-vertical"></div>
               <div class="font-size-control">
@@ -63,9 +66,16 @@
                 <label class="image-enunciado-label"><i class="fa-solid fa-list-ol"></i></label>
                 <button class="decrease-image-enunciado-size" title="Reduzir imagem do enunciado (Q)"><i class="fa-solid fa-down-left-and-up-right-to-center"></i></i></button>
                 <select class="image-enunciado-number">
-                  {% for questao in questoes %}
-                    <option>{{ forloop.counter}}</option>
-                  {% endfor %}
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                  <option>6</option>
+                  <option>7</option>
+                  <option>8</option>
+                  <option>9</option>
+                  <option>10</option>
                 </select>
                 <button class="increase-image-enunciado-size" title="Aumentar imagem do enunciado (E)"><i class="fa-solid fa-up-right-and-down-left-from-center"></i></button>
               </div>
@@ -73,18 +83,36 @@
                 <label class="image-question-label"><i class="fa-regular fa-a"></i></label>
                 <button class="decrease-image-resposta-size" title="Reduzir imagem das alternativas (Q)"><i class="fa-solid fa-down-left-and-up-right-to-center"></i></i></button>
                 <select class="image-resposta-number">
-                  {% for questao in questoes %}
-                    <option>{{ forloop.counter}}</option>
-                  {% endfor %}
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                  <option>6</option>
+                  <option>7</option>
+                  <option>8</option>
+                  <option>9</option>
+                  <option>10</option>
                 </select>
                 <button class="increase-image-resposta-size" title="Aumentar imagem das alternativas (E)"><i class="fa-solid fa-up-right-and-down-left-from-center"></i></button>
               </div>
               <div class="linha-vertical"></div>
-              <div class="color" title="Cor do texto">
+              <div class="color" title="Cor do texto" >
                 <i class="fa-solid fa-droplet"></i>
               </div>
               <div class="color-picker" title="Cor">
                 <input type="color" class="color-picker-input">
+              </div>
+              <div class="linha-vertical"></div>
+              <div class="name">
+                {% if questoes %}
+                <input type="text" class="name-input" value="Avaliação {{ tipo_prova }} de {{ nome_disciplina }} - {{ turma }} - {{ curso }} - {{ data }}" placeholder="Nome da avaliação">
+                {% else %}
+                <input type="text" class="name-input" value="{{ prova.nome_prova }}" placeholder="Nome da avaliação">
+                {% endif %}
+              </div>
+              <div class="save">
+                <button><div class="font-size-label">Salvar</div><i class="fa-solid fa-save"></i></button>
               </div>
               <div class="reload">
                 <button class="reload" onclick="window.location.reload()"><div class="font-size-label">Recarregar</div><i class="fa-solid fa-redo"></i></button>
@@ -105,6 +133,7 @@
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
 <script src="{% static 'js/toolbarFormatButtons.js' %}"></script>
 <script src="{% static 'js/toolbarInputSize.js' %}"></script>
+<script src="{% static 'js/save.js' %}"></script>
 <script src="{% static 'js/moments.js' %}"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
   integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

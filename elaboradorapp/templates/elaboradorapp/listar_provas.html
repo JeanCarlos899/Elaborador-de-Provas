@@ -1,0 +1,50 @@
+{% extends "elaboradorapp/base.html" %}
+{% load static %}
+{% block title %}Avaliações salvas{% endblock title %}
+{% block content %}
+<head>
+    {% csrf_token %}
+</head>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-12">
+                <h6 class="text-center mt-4 mb-4">AVALIAÇÕES SALVAS</h6>
+            </div>
+            <div class="col-12">
+                <form class="form-horizontal mb-4" action="." method="GET">
+                    <div class="input-group">
+                        <input id="search_box" name="search_box" type="text" placeholder="Informe o nome da avaliação" class="form-control" autofocus="true" value="{{ request.GET.search_box }}">
+                        <span class="input-group-btn">
+                            <button type="submit" class="btn btn-default form-control" title="Clique para realizar a pesquisar">
+                                <i class="fa fa-search" aria-hidden="true"></i>
+                            </button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nome prova</th>
+                            <th scope="col">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for prova in provas %}
+                        <tr>
+                            <td><i class="fa-regular fa-file"></i>  {{ prova.nome_prova }}</td>
+                            <td>
+                                <a href="{% url 'elaboradorapp:ver-prova' prova.id %}" class="btn btn-primary">Ver/editar prova</a>
+                                <a href="{% url 'elaboradorapp:deletar-prova' prova.id %}" class="btn btn-danger" onclick="return confirmDeletion()">Excluir</a>
+                            </td>                            
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

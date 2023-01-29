@@ -3,6 +3,7 @@ const increaseButton = document.querySelector('.increase-font-size');
 const fontSizeNumber = document.querySelector('.font-size-number');
 
 decreaseButton.addEventListener('click', function () {
+    saveMoment();
     let currentSize = fontSizeNumber.value;
     fontSizeNumber.value = currentSize - 1;
     document.querySelectorAll("p").forEach(function (p) {
@@ -11,6 +12,7 @@ decreaseButton.addEventListener('click', function () {
 });
 
 increaseButton.addEventListener('click', function () {
+    saveMoment();
     let currentSize = fontSizeNumber.value;
     fontSizeNumber.value = parseInt(currentSize) + 1;
     document.querySelectorAll("p").forEach(function (p) {
@@ -29,7 +31,7 @@ const increaseImageEnunciado = document.querySelector('.increase-image-enunciado
 const imageEnunciadoNumber = document.querySelector('.image-enunciado-number');
 
 decreaseImageEnunciado.addEventListener('click', function () {
-    saveMemento();
+    saveMoment();
     let currentQuestion = imageEnunciadoNumber.value;
     let currentHeight = document.getElementById(`imagem-enunciado-${currentQuestion}`).style.height;
     let imagens = document.querySelectorAll(`#imagem-enunciado-${currentQuestion}`);
@@ -39,7 +41,7 @@ decreaseImageEnunciado.addEventListener('click', function () {
 });
 
 increaseImageEnunciado.addEventListener('click', function () {
-    saveMemento();
+    saveMoment();
     let currentQuestion = imageEnunciadoNumber.value;
     let currentHeight = document.getElementById(`imagem-enunciado-${currentQuestion}`).style.height;
     let imagens = document.querySelectorAll(`#imagem-enunciado-${currentQuestion}`);
@@ -54,7 +56,7 @@ const increaseImageResposta = document.querySelector('.increase-image-resposta-s
 const imageRespostaNumber = document.querySelector('.image-resposta-number');
 
 decreaseImageResposta.addEventListener('click', function () {
-    saveMemento();
+    saveMoment();
     let currentQuestion = imageRespostaNumber.value;
     let currentHeight = document.getElementById(`imagem-alternativa-${currentQuestion}`).style.height;
     let imagens = document.querySelectorAll(`#imagem-alternativa-${currentQuestion}`);
@@ -64,7 +66,7 @@ decreaseImageResposta.addEventListener('click', function () {
 });
 
 increaseImageResposta.addEventListener('click', function () {
-    saveMemento();
+    saveMoment();
     let currentQuestion = imageRespostaNumber.value;
     let currentHeight = document.getElementById(`imagem-alternativa-${currentQuestion}`).style.height;
     let imagens = document.querySelectorAll(`#imagem-alternativa-${currentQuestion}`);
@@ -95,7 +97,6 @@ function attImageResposta(id) {
 
 document.addEventListener('keydown', function (event) {
     if (event.key === 'q') {
-        console.log(ultimoClick);
         if (ultimoClick === "imagem-enunciado") {
             decreaseImageEnunciado.click();
         } else if (ultimoClick === "imagem-resposta") {
@@ -103,7 +104,6 @@ document.addEventListener('keydown', function (event) {
         }
     }
     if (event.key === 'e') { 
-        console.log(ultimoClick);
         if (ultimoClick === "imagem-enunciado") {
             increaseImageEnunciado.click();
         } else if (ultimoClick === "imagem-resposta") {

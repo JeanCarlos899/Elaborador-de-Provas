@@ -11,6 +11,18 @@ body {
     width: 100%;
 }
 
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #4CAF50;
+    color: white;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+}
+
 /* estilo de listagem das provas */
 
 .prova ::selection {
@@ -44,7 +56,7 @@ img:active {
 
 p {
     font-family: 'Artifika', serif !important;
-    font-size: 12px;
+    font-size: 11px;
 }
 
 td {
@@ -176,6 +188,11 @@ table, td {
     }
     #turma {
         width: 150px !important;
+    }
+    .avaliacao {
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+        width: 100% !important;
     }
 }
 

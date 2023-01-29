@@ -1,0 +1,23 @@
+{% extends "elaboradorapp/base.html" %}
+{% block title %}{{ prova.nome_prova }}{% endblock %}
+{% load static %}
+
+{% block content %}
+<head>
+    <link rel="stylesheet" href="{% static 'css/questions.css' %}">
+    <link rel="stylesheet" href="{% static 'css/toolbar.css' %}">
+    <style>
+        .reload {
+            display: none;
+        }
+    </style>
+    {% csrf_token %}
+</head>
+<body>
+    <div class="avaliacao mt-5">
+        {{ prova.html_prova|safe }}
+    </div>
+</body>
+
+{% endblock content %}
+
