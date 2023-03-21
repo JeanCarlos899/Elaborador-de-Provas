@@ -2,6 +2,8 @@
 const moments = []
 const redoStack = []
 const divProva = document.querySelector('.prova')
+const undoButton = document.querySelector(".undo");
+const redoButton = document.querySelector(".redo");
 
 function saveMoment() {
     moments.push(divProva.innerHTML)
@@ -24,16 +26,13 @@ function redo() {
 }
 
 document.addEventListener("keydown", function (e) {
-    if (e.ctrlKey && e.keyCode == 90) {
-        undo();
-    }
-    if (e.ctrlKey && e.keyCode == 89) {
-        redo();
-    }
+  if (e.ctrlKey && e.key === "z") {
+    undo();
+  }
+  if (e.ctrlKey && e.key === "y") {
+    redo();
+  }
 });
-
-const undoButton = document.querySelector('.undo')
-const redoButton = document.querySelector('.redo')
 
 undoButton.addEventListener('click', function () {
     undo();

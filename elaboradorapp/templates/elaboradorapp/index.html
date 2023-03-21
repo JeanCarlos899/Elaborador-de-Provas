@@ -105,7 +105,7 @@
                     <div class="row">
                       <div class="col">
                         <label for="exampleFormControlSelect1">Série</label>
-                        <select class="form-control" id="exampleFormControlSelect1" name="serie">
+                        <select class="form-control" id="serie" name="serie">
                           <option value="Indefinido">Indefinido</option>
                           <option value="1">1</option>
                           <option value="2">2</option>
@@ -162,7 +162,7 @@
                 <div class="row">
                   <div class="col-3">
                     <label for="exampleFormControlSelect1">Turma</label>
-                    <select type="text" class="form-control" name="turma" id="exampleFormControlSelect1" placeholder="Informe o nome da turma para o cabeçalho">
+                    <select type="text" class="form-control" name="turma" id="turma" placeholder="Informe o nome da turma para o cabeçalho">
                       <option>1º Ano</option>
                       <option>2º Ano</option>
                       <option>3º Ano</option>
@@ -263,5 +263,14 @@
     document.getElementById('topo').value = 'Avaliação ' + tipo_prova.value + ' de ' + disciplina.value + ' - ' + bimestre.value;
   });
   
+  const serie = document.getElementById('serie');
+
+  serie.addEventListener('change', function() {
+    if (serie.value == 'Indefinido') {
+      document.getElementById('turma').value = '1º Ano';
+    } else {
+      document.getElementById('turma').value = serie.value + 'º Ano';
+    }
+  });
 </script>
 {% endblock content %}

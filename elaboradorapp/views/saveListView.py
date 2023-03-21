@@ -6,7 +6,6 @@ from django.shortcuts import redirect
 from django.db.models import Q
 from bs4 import BeautifulSoup
 
-
 class ListarProvas(ListView):
     model = Prova
     template_name = 'elaboradorapp/listar_provas.html'

@@ -198,7 +198,6 @@ class MyProvaAdmin(admin.ModelAdmin):
         obj.criador = request.user
         super().save_model(request, obj, form, change)
 
-        
 admin.site.register(Question, QuestionAdmin)
 admin.site.register(Disciplina, MyDisciplinaAdmin)
 admin.site.register(Conteudo, ConteudoAdmin)

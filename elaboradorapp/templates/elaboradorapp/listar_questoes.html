@@ -9,6 +9,7 @@
 <head>
     <link rel="stylesheet" href="{% static 'css/questions.css' %}">
     <link rel="stylesheet" href="{% static 'css/toolbar.css' %}">
+    <script src="{% static 'js/dragImg.js' %}"></script>
     {% csrf_token %}
 </head>
 <body>
@@ -62,8 +63,8 @@
                     {% for questao in questoes %}
                     <p class="mb-2 text-justify" style="font-size: 11px; text-align: justify;"><strong>{{ forloop.counter }}. </strong>{{ questao.enunciado }}</p>
                     {% if questao.imagem %}
-                    <img src="{{ questao.imagem.url }}" id="imagem-enunciado-{{ forloop.counter }}"
-                        style="height: 150px; max-width: 100%;" class="imagem-enunciado mb-2" alt="Imagem responsiva" onclick="attImageEnunciado('{{ forloop.counter }}')">
+                    <img src="{{ questao.imagem.url }}" id="imagem-enunciado-{{ forloop.counter }}" draggable="true" ondragstart="drag(event)"
+                        style="height: 150px; max-width: 100%;" class="imagem-enunciado mb-0" alt="Imagem responsiva" onclick="attImageEnunciado('{{ forloop.counter }}')">
                     {% endif %}
                     {% if questao.comando %}
                     <p class="mb-2 text-justify" style="font-size: 11px; text-align: justify;">{{ questao.comando }}</p>
@@ -99,11 +100,16 @@
                             </div>
                             {% else %}
                             {% if questao.alternativa_a %}
-                            <p class="mb-0 text-justify" style="font-size: 11px; text-align: justify;">a) {{ questao.alternativa_a }}</p>
-                            <p class="mb-0 text-justify" style="font-size: 11px; text-align: justify;">b) {{ questao.alternativa_b }}</p>
-                            <p class="mb-0 text-justify" style="font-size: 11px; text-align: justify;">c) {{ questao.alternativa_c }}</p>
-                            <p class="mb-0 text-justify" style="font-size: 11px; text-align: justify;">d) {{ questao.alternativa_d }}</p>
-                            <p class="mb-0 text-justify" style="font-size: 11px; text-align: justify;">e) {{ questao.alternativa_e }}</p>
+                            <div class="col-auto col-sm-auto">
+                                <p class="mb-0 text-justify col-text" style="font-size: 11px; text-align: justify;">a) {{ questao.alternativa_a }}</p>
+                                <p class="mb-0 text-justify col-text" style="font-size: 11px; text-align: justify;">b) {{ questao.alternativa_b }}</p>
+                                <p class="mb-0 text-justify col-text" style="font-size: 11px; text-align: justify;">c) {{ questao.alternativa_c }}</p>
+                                <p class="mb-0 text-justify col-text" style="font-size: 11px; text-align: justify;">d) {{ questao.alternativa_d }}</p>
+                                <p class="mb-0 text-justify col-text" style="font-size: 11px; text-align: justify;">e) {{ questao.alternativa_e }}</p>
+                            </div>
+                            <div class="col drop-container" ondrop="drop(event)" ondragover="allowDrop(event)">
+                                <!-- conteúdo da segunda coluna -->
+                            </div>
                             {% endif %}
                             {% endif %}
                         </div>

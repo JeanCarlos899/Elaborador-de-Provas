@@ -43,13 +43,13 @@ decreaseImageEnunciado.addEventListener('click', function () {
 increaseImageEnunciado.addEventListener('click', function () {
     saveMoment();
     let currentQuestion = imageEnunciadoNumber.value;
+    console.log(currentQuestion);
     let currentHeight = document.getElementById(`imagem-enunciado-${currentQuestion}`).style.height;
     let imagens = document.querySelectorAll(`#imagem-enunciado-${currentQuestion}`);
     imagens.forEach(function (imagem) {
         imagem.style.height = (parseInt(currentHeight) + 5) + "px";
     });
 });
-
 
 const decreaseImageResposta = document.querySelector('.decrease-image-resposta-size');
 const increaseImageResposta = document.querySelector('.increase-image-resposta-size');
@@ -71,11 +71,35 @@ increaseImageResposta.addEventListener('click', function () {
     let currentHeight = document.getElementById(`imagem-alternativa-${currentQuestion}`).style.height;
     let imagens = document.querySelectorAll(`#imagem-alternativa-${currentQuestion}`);
     imagens.forEach(function (imagem) {
-        imagem.style.height = (parseInt(currentHeight) + 5) + "px";
+        imagem.style.height = (parseInt(currentHeight) + 3) + "px";
     });
 });
 
+function addMarginLeft () {
+    saveMoment();
+    let currentQuestion = imageEnunciadoNumber.value;
+    let currentMargin = document.getElementById(`imagem-enunciado-${currentQuestion}`).style.marginLeft;
+    if (currentMargin === "") {
+        currentMargin = 0;
+    }
+    let imagens = document.querySelectorAll(`#imagem-enunciado-${currentQuestion}`);
+    imagens.forEach(function (imagem) {
+        imagem.style.marginLeft = (parseInt(currentMargin) + 3) + "px";
+    });
+}
 
+function removeMarginLeft () {
+    saveMoment();
+    let currentQuestion = imageEnunciadoNumber.value;
+    let currentMargin = document.getElementById(`imagem-enunciado-${currentQuestion}`).style.marginLeft;
+    if (currentMargin === "") {
+        currentMargin = 0;
+    }
+    let imagens = document.querySelectorAll(`#imagem-enunciado-${currentQuestion}`);
+    imagens.forEach(function (imagem) {
+        imagem.style.marginLeft = (parseInt(currentMargin) - 5) + "px";
+    });
+}
 
 function removeImageEnunciado() {
     saveMoment();
@@ -125,6 +149,17 @@ document.addEventListener('keydown', function (event) {
     if (event.key === 'Delete') {
         if (ultimoClick === "imagem-enunciado") {
             removeImageEnunciado();
+        } 
+    } 
+    // remover e adicionar margem esquerda usando as setas do teclado
+    if (event.key === 'ArrowLeft') {
+        if (ultimoClick === "imagem-enunciado") {
+            removeMarginLeft();
+        } 
+    }
+    if (event.key === 'ArrowRight') {
+        if (ultimoClick === "imagem-enunciado") {
+            addMarginLeft();
         } 
     }
 });
