@@ -23,6 +23,12 @@ body {
     text-align: center;
 }
 
+.drop-container {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
 /* estilo de listagem das provas */
 
 .prova ::selection {

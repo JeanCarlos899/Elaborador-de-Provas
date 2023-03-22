@@ -75,19 +75,6 @@ increaseImageResposta.addEventListener('click', function () {
     });
 });
 
-function addMarginLeft () {
-    saveMoment();
-    let currentQuestion = imageEnunciadoNumber.value;
-    let currentMargin = document.getElementById(`imagem-enunciado-${currentQuestion}`).style.marginLeft;
-    if (currentMargin === "") {
-        currentMargin = 0;
-    }
-    let imagens = document.querySelectorAll(`#imagem-enunciado-${currentQuestion}`);
-    imagens.forEach(function (imagem) {
-        imagem.style.marginLeft = (parseInt(currentMargin) + 3) + "px";
-    });
-}
-
 function removeMarginLeft () {
     saveMoment();
     let currentQuestion = imageEnunciadoNumber.value;
@@ -131,6 +118,37 @@ function attImageResposta(id) {
     }, 100);
 }
 
+const alignCenter = () => {
+  saveMoment();
+  let currentQuestion = imageEnunciadoNumber.value;
+  let divImagem = document.getElementById(
+    `imagem-enunciado-${currentQuestion}`
+  ).parentElement;
+  divImagem.style.justifyContent = "center";
+  console.log("center");
+};
+
+const alignLeft = () => {
+  saveMoment();
+  let currentQuestion = imageEnunciadoNumber.value;
+  let divImagem = document.getElementById(
+    `imagem-enunciado-${currentQuestion}`
+  ).parentElement;
+  divImagem.style.justifyContent = "left";
+  console.log("left");
+};
+
+const alignRight = () => {
+  saveMoment();
+  let currentQuestion = imageEnunciadoNumber.value;
+  let divImagem = document.getElementById(
+    `imagem-enunciado-${currentQuestion}`
+  ).parentElement;
+  divImagem.style.justifyContent = "right";
+  console.log("right");
+};
+
+
 document.addEventListener('keydown', function (event) {
     if (event.key === 'q') {
         if (ultimoClick === "imagem-enunciado") {
@@ -150,16 +168,20 @@ document.addEventListener('keydown', function (event) {
         if (ultimoClick === "imagem-enunciado") {
             removeImageEnunciado();
         } 
-    } 
-    // remover e adicionar margem esquerda usando as setas do teclado
-    if (event.key === 'ArrowLeft') {
-        if (ultimoClick === "imagem-enunciado") {
-            removeMarginLeft();
-        } 
     }
-    if (event.key === 'ArrowRight') {
+    if (event.key === 'w') {
         if (ultimoClick === "imagem-enunciado") {
-            addMarginLeft();
-        } 
+            alignCenter();
+        }
+    }
+    if (event.key === 'a') {
+        if (ultimoClick === "imagem-enunciado") {
+            alignLeft();
+        }
+    }
+    if (event.key === 'd') {
+        if (ultimoClick === "imagem-enunciado") {
+            alignRight();
+        }
     }
 });
