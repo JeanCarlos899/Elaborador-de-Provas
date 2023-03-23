@@ -61,57 +61,60 @@
                     </ul>
                     <hr class="mt-2 mb-3">
                     {% for questao in questoes %}
-                    <p class="mb-2 text-justify" style="font-size: 11px; text-align: justify;"><strong>{{ forloop.counter }}. </strong>{{ questao.enunciado }}</p>
-                    {% if questao.imagem %}
-                    <img src="{{ questao.imagem.url }}" id="imagem-enunciado-{{ forloop.counter }}" draggable="true" ondragstart="drag(event)"
-                        style="height: 150px; max-width: 100%;" class="imagem-enunciado mb-0" alt="Imagem responsiva" onclick="attImageEnunciado('{{ forloop.counter }}')">
-                    {% endif %}
-                    {% if questao.comando %}
-                    <p class="mb-2 text-justify" style="font-size: 11px; text-align: justify;">{{ questao.comando }}</p>
-                    {% endif %}
-                    <div class="alternativas">
-                        <div class="row mb-3">
-                            {% if questao.imagem_a %}
-                            <div class="col">
-                                <p class="mb-0 mt-2 text-justify">
-                                    a) <img id="imagem-alternativa-{{ forloop.counter }}" style="height: 150px;"
-                                        src="{{ questao.imagem_a.url }}" alt="Imagem responsiva" class="imagem-resposta" onclick="attImageResposta('{{ forloop.counter }}')">
-                                </p>
-                                <p class="mb-0 mt-2 text-justify">
-                                    b) <img id="imagem-alternativa-{{ forloop.counter }}" style="height: 150px;"
-                                        src="{{ questao.imagem_b.url }}" alt="Imagem responsiva" class="imagem-resposta" onclick="attImageResposta('{{ forloop.counter }}')">
-                                </p>
+                    <div class="questao-{{ forloop.counter }} div-questoes">
+                        <p class="mb-2 text-justify" id="questao" style="font-size: 11px; text-align: justify;"><strong>{{ forloop.counter }}. </strong>{{ questao.enunciado }}</p>
+                        {% if questao.imagem %}
+                        <div class="col drop-container" ondrop="drop(event)" ondragover="allowDrop(event)">
+                            <img src="{{ questao.imagem.url }}" id="imagem-enunciado-{{ forloop.counter }}" draggable="true" ondragstart="drag(event)" style="height: 150px; max-width: 100%;" class="imagem-enunciado mb-0" alt="Imagem responsiva" onclick="attImageEnunciado('{{ forloop.counter }}')">
+                        </div>
+                        {% endif %}
+                        {% if questao.comando %}
+                        <p class="mb-2 text-justify" style="font-size: 11px; text-align: justify;">{{ questao.comando }}</p>
+                        {% endif %}
+                        <div class="alternativas">
+                            <div class="row mb-3">
+                                {% if questao.imagem_a %}
+                                <div class="col">
+                                    <p class="mb-0 mt-2 text-justify">
+                                        a) <img id="imagem-alternativa-{{ forloop.counter }}" style="height: 150px;"
+                                            src="{{ questao.imagem_a.url }}" alt="Imagem responsiva" class="imagem-resposta" onclick="attImageResposta('{{ forloop.counter }}')">
+                                    </p>
+                                    <p class="mb-0 mt-2 text-justify">
+                                        b) <img id="imagem-alternativa-{{ forloop.counter }}" style="height: 150px;"
+                                            src="{{ questao.imagem_b.url }}" alt="Imagem responsiva" class="imagem-resposta" onclick="attImageResposta('{{ forloop.counter }}')">
+                                    </p>
+                                </div>
+                                <div class="col">
+                                    <p class="mb-0 mt-2 text-justify">
+                                        c) <img id="imagem-alternativa-{{ forloop.counter }}" style="height: 150px;"
+                                            src="{{ questao.imagem_c.url }}" alt="Imagem responsiva" class="imagem-resposta" onclick="attImageResposta('{{ forloop.counter }}')">
+                                    </p>
+                                    <p class="mb-0 mt-2 text-justify">
+                                        d) <img id="imagem-alternativa-{{ forloop.counter }}" style="height: 150px;"
+                                            src="{{ questao.imagem_d.url }}" alt="Imagem responsiva" class="imagem-resposta" onclick="attImageResposta('{{ forloop.counter }}')">
+                                    </p>
+                                </div>
+                                <div class="col">
+                                    <p class="mb-0 mt-2 text-justify">
+                                        e) <img id="imagem-alternativa-{{ forloop.counter }}" style="height: 150px;"
+                                            src="{{ questao.imagem_e.url }}" alt="Imagem responsiva" class="imagem-resposta">
+                                    </p>
+                                </div>
+                                {% else %}
+                                {% if questao.alternativa_a %}
+                                <div class="col-auto col-sm-auto">
+                                    <p class="mb-0 text-justify col-text" style="font-size: 11px; text-align: justify;">a) {{ questao.alternativa_a }}</p>
+                                    <p class="mb-0 text-justify col-text" style="font-size: 11px; text-align: justify;">b) {{ questao.alternativa_b }}</p>
+                                    <p class="mb-0 text-justify col-text" style="font-size: 11px; text-align: justify;">c) {{ questao.alternativa_c }}</p>
+                                    <p class="mb-0 text-justify col-text" style="font-size: 11px; text-align: justify;">d) {{ questao.alternativa_d }}</p>
+                                    <p class="mb-0 text-justify col-text" style="font-size: 11px; text-align: justify;">e) {{ questao.alternativa_e }}</p>
+                                </div>
+                                <div class="col drop-container" ondrop="drop(event)" ondragover="allowDrop(event)">
+                                    <!-- conteúdo da segunda coluna -->
+                                </div>
+                                {% endif %}
+                                {% endif %}
                             </div>
-                            <div class="col">
-                                <p class="mb-0 mt-2 text-justify">
-                                    c) <img id="imagem-alternativa-{{ forloop.counter }}" style="height: 150px;"
-                                        src="{{ questao.imagem_c.url }}" alt="Imagem responsiva" class="imagem-resposta" onclick="attImageResposta('{{ forloop.counter }}')">
-                                </p>
-                                <p class="mb-0 mt-2 text-justify">
-                                    d) <img id="imagem-alternativa-{{ forloop.counter }}" style="height: 150px;"
-                                        src="{{ questao.imagem_d.url }}" alt="Imagem responsiva" class="imagem-resposta" onclick="attImageResposta('{{ forloop.counter }}')">
-                                </p>
-                            </div>
-                            <div class="col">
-                                <p class="mb-0 mt-2 text-justify">
-                                    e) <img id="imagem-alternativa-{{ forloop.counter }}" style="height: 150px;"
-                                        src="{{ questao.imagem_e.url }}" alt="Imagem responsiva" class="imagem-resposta">
-                                </p>
-                            </div>
-                            {% else %}
-                            {% if questao.alternativa_a %}
-                            <div class="col-auto col-sm-auto">
-                                <p class="mb-0 text-justify col-text" style="font-size: 11px; text-align: justify;">a) {{ questao.alternativa_a }}</p>
-                                <p class="mb-0 text-justify col-text" style="font-size: 11px; text-align: justify;">b) {{ questao.alternativa_b }}</p>
-                                <p class="mb-0 text-justify col-text" style="font-size: 11px; text-align: justify;">c) {{ questao.alternativa_c }}</p>
-                                <p class="mb-0 text-justify col-text" style="font-size: 11px; text-align: justify;">d) {{ questao.alternativa_d }}</p>
-                                <p class="mb-0 text-justify col-text" style="font-size: 11px; text-align: justify;">e) {{ questao.alternativa_e }}</p>
-                            </div>
-                            <div class="col drop-container" ondrop="drop(event)" ondragover="allowDrop(event)">
-                                <!-- conteúdo da segunda coluna -->
-                            </div>
-                            {% endif %}
-                            {% endif %}
                         </div>
                     </div>
                     {% endfor %}
@@ -132,9 +135,9 @@
                                 </thead>
                                 <tbody>
                                     {% for questao in questoes %}
-                                    <tr>
+                                    <tr class="tr-questao-{{ forloop.counter }} tr-questao-gabarito">
                                         <td style="text-align: center; vertical-align: middle;">{{ questao.id }}</td>
-                                        <td style="text-align: center; vertical-align: middle;">{{ forloop.counter }}
+                                        <td class="numero-da-questao" style="text-align: center; vertical-align: middle;">{{ forloop.counter }}
                                         </td>
                                         {% if questao.gabarito %}
                                         <td>{{ questao.gabarito }}</td>
