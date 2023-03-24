@@ -14,8 +14,8 @@
 .linha-vertical {
     height: 24px;
     border-left: 1px solid #e0e0e0;
-    margin-left: 1%;
-    margin-right: 1%;
+    margin-left: 0.5%;
+    margin-right: 0.5%;
 }
 
 .image-enunciado-label, .image-question-label {
@@ -39,12 +39,19 @@ input[type="color"] {
 .color-picker {
     display: flex;
     align-items: center;
-    padding: 8px;
+    padding: 8px 0 8px 0px;
+}
+
+.trashInput {
+    display: flex;
+    align-items: center;
+    padding: 8px 0 8px 0px;
+    background-color: none;
 }
 
 /* ========================= Configurações gerais - controls ============================= */
 
-.font-size-control, .image-enunciado-control, .image-question-control, .name-input, .trashInput {
+.font-size-control, .image-enunciado-control, .image-question-control, .name-input {
     display: flex;
     align-items: center;
     padding: 8px;
@@ -52,7 +59,7 @@ input[type="color"] {
 }
 
 .name-input {
-    width: 100%;
+    width: 15vw;
     height: 24px;
     background-color: white;
     border: 1px solid #e0e0e0;
@@ -94,7 +101,6 @@ input[type="color"] {
     width: 40px;
     height: 24px;
     margin: 0;
-    font-size: 16px;
     text-align: center;
     border: 1px solid #e0e0e0;
     font-size: 14px;
@@ -105,7 +111,7 @@ input[type="color"] {
     outline: 0;
 }
 
-.font-size-number::-webkit-inner-spin-button, .image-enunciado-size-number::-webkit-inner-spin-button, .image-question-size-number::-webkit-inner-spin-button, .number-question-delete::-webkit-inner-spin-button { 
+.font-size-number::-webkit-inner-spin-button, .image-enunciado-size-number::-webkit-inner-spin-button, .image-question-size-number::-webkit-inner-spin-button { 
     -webkit-appearance: none;
     
 }

@@ -1,24 +1,22 @@
-{% extends "elaboradorapp/base.html" %}
+{% extends "elaboradorapp/toolbar.html" %}
 {% block title %}{{ prova.nome_prova }}{% endblock %}
 {% load static %}
 
-{% block content %}
-<head>
+{% block styles %}
     <link rel="stylesheet" href="{% static 'css/questions.css' %}">
     <link rel="stylesheet" href="{% static 'css/toolbar.css' %}">
-    <script src="{% static 'js/dragImg.js' %}"></script>
-    <style>
-        .reload {
-            display: none;
-        }
-    </style>
-    {% csrf_token %}
-</head>
-<body>
-    <div class="avaliacao mt-5">
-        {{ prova.html_prova|safe }}
-    </div>
-</body>
+{% endblock styles %}
 
+{% block content %}
+<div class="avaliacao mt-5">
+    {{ prova.html_prova|safe }}
+</div>
 {% endblock content %}
 
+{% block scripts %}
+<script src="{% static 'js/toolbarFormatButtons.js' %}"></script>
+<script src="{% static 'js/toolbarInputSize.js' %}"></script>
+<script src="{% static 'js/save.js' %}"></script>
+<script src="{% static 'js/moments.js' %}"></script>
+<script src="{% static 'js/dragImg.js' %}"></script>
+{% endblock scripts %}

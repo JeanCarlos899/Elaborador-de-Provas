@@ -31,7 +31,7 @@ body {
 
 /* estilo de listagem das provas */
 
-.prova ::selection {
+.prova::selection {
     background: #80afe9;
     color: rgb(0, 0, 0);
 }

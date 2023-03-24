@@ -1,17 +1,13 @@
-{% extends "elaboradorapp/base.html" %}
+{% extends "elaboradorapp/toolbar.html" %}
 {% load static %}
 {% block title %}Avaliação {{ tipo_prova }} de {{ nome_disciplina }} - {{ turma }} - {{ curso }} - {{ data }}{% endblock %}
 
-{% block content %}
-<!DOCTYPE html>
-<html lang="pt-BR">
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/questions.css' %}">
+<link rel="stylesheet" href="{% static 'css/toolbar.css' %}">
+{% endblock %}
 
-<head>
-    <link rel="stylesheet" href="{% static 'css/questions.css' %}">
-    <link rel="stylesheet" href="{% static 'css/toolbar.css' %}">
-    <script src="{% static 'js/dragImg.js' %}"></script>
-    {% csrf_token %}
-</head>
+{% block content %}
 <body>
     <div class="avaliacao mt-5">
         <div class="container mt-5">
@@ -167,3 +163,11 @@
     </div>
 </body>
 {% endblock content %}
+
+{% block scripts %}
+<script src="{% static 'js/toolbarFormatButtons.js' %}"></script>
+<script src="{% static 'js/toolbarInputSize.js' %}"></script>
+<script src="{% static 'js/save.js' %}"></script>
+<script src="{% static 'js/moments.js' %}"></script>
+<script src="{% static 'js/dragImg.js' %}"></script>
+{% endblock scripts %}

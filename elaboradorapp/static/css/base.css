@@ -14,16 +14,10 @@ h5 {
     margin-bottom: 1rem;
 }
 
-.toolbar {
-    display: none;
-}
-
-.configs {
-    display: none;
-}
-
-.navbar {
+.navbar, .navbar-lg {
     background: linear-gradient(to right, #b7293a, #2e2d83);
+    /* configurar o wrap */
+    flex-wrap: nowrap;
 }
 
 header {

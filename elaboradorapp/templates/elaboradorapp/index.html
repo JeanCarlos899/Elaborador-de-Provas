@@ -1,5 +1,5 @@
 {% extends "elaboradorapp/base.html" %}
-{% load tz %}
+{% load static %}
 {% block title %}Elaborador de Provas{% endblock %}
 
 {% block content %}
@@ -31,29 +31,8 @@
                   </div>
                   <div class="col">
                     <!-- quantidade de questões da prova -->
-                    <label for="exampleFormControlSelect1">Quantidade de questões</label>
-                    <select class="form-control" id="exampleFormControlSelect1" name="qtd_questoes">
-                      <option>1</option>
-                      <option>2</option>
-                      <option>3</option>
-                      <option>4</option>
-                      <option>5</option>
-                      <option>6</option>
-                      <option>7</option>
-                      <option>8</option>
-                      <option>9</option>
-                      <option selected="10">10</option>
-                      <option>11</option>
-                      <option>12</option>
-                      <option>13</option>
-                      <option>14</option>
-                      <option>15</option>
-                      <option>16</option>
-                      <option>17</option>
-                      <option>18</option>
-                      <option>19</option>
-                      <option>20</option>
-                    </select>
+                    <label for="quantidade_questoes">Quantidade de questões</label>
+                    <input class="form-control" type="number" name="qtd_questoes" id="quantidade_questoes" value="10" required>
                   </div>
                 </div>
                 <div class="row">
@@ -254,33 +233,8 @@
     </div>
   </form>
 </div>
-<script>
-  const disciplina = document.getElementById('disciplina');
-  const bimestre = document.getElementById('bimestre');
-  const tipo_prova = document.getElementById('tipo_prova');
-
-  document.getElementById('topo').value = 'Avaliação ' + tipo_prova.value + ' de ' + disciplina.value + ' - ' + bimestre.value;
-
-  disciplina.addEventListener('change', function() {
-    document.getElementById('topo').value = 'Avaliação ' + tipo_prova.value + ' de ' + disciplina.value + ' - ' + bimestre.value;
-  });
-
-  bimestre.addEventListener('change', function() {
-    document.getElementById('topo').value = 'Avaliação ' + tipo_prova.value + ' de ' + disciplina.value + ' - ' + bimestre.value;
-  });
-
-  tipo_prova.addEventListener('change', function() {
-    document.getElementById('topo').value = 'Avaliação ' + tipo_prova.value + ' de ' + disciplina.value + ' - ' + bimestre.value;
-  });
-  
-  const serie = document.getElementById('serie');
-
-  serie.addEventListener('change', function() {
-    if (serie.value == 'Indefinido') {
-      document.getElementById('turma').value = '1º Ano';
-    } else {
-      document.getElementById('turma').value = serie.value + 'º Ano';
-    }
-  });
-</script>
 {% endblock content %}
+
+{% block scripts %}
+<script src="{% static 'js/index.js' %}"></script>
+{% endblock scripts %}
