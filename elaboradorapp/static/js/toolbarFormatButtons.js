@@ -9,7 +9,7 @@ botaoNegrito.addEventListener("click", function () {
 
     // Verificar se há texto selecionado
     if (selecao.toString().length > 0) {
-        saveMoment();
+        moments.saveMoment();
         // Criar um novo elemento span
         try {
             let novoElemento = document.createElement("span");
@@ -34,7 +34,7 @@ botaoItalico.addEventListener("click", function () {
 
     // Verificar se há texto selecionado
     if (selecao.toString().length > 0) {
-        saveMoment();
+        moments.saveMoment();
         // Criar um novo elemento span
         try {
             let novoElemento = document.createElement("span");
@@ -59,7 +59,7 @@ botaoSublinhado.addEventListener("click", function () {
 
     // Verificar se há texto selecionado
     if (selecao.toString().length > 0) {
-        saveMoment();
+        moments.saveMoment();
         // Criar um novo elemento span
         try {
             let novoElemento = document.createElement("span");
@@ -84,7 +84,7 @@ fontCase.addEventListener("click", function () {
 
     // Verificar se há texto selecionado
     if (selecao.toString().length > 0) {
-        saveMoment();
+        moments.saveMoment();
         // Obter o range da seleção
         try {
             let range = selecao.getRangeAt(0);
@@ -125,7 +125,7 @@ fontColor.addEventListener("click", function () {
 function formataFontColor() {
     let selecao = window.getSelection();
     if (selecao.toString().length > 0) {
-        saveMoment();
+        moments.saveMoment();
         try {
             let color = document.querySelector(".color-picker-input").value;
             let novoElemento = document.createElement("span");

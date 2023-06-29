@@ -1,4 +1,3 @@
-
 document.querySelector(".save").addEventListener("click", function(){
     const url = location.pathname;
     const parts = url.split('/');
